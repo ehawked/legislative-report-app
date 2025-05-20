@@ -220,10 +220,10 @@ function App() {
             <div className="floating-tag" style={{ top: '-5%', right: '5%', animationDelay: '1.5s', fontSize: '0.875rem' }}>
               Inform
             </div>
-            <div className="floating-tag" style={{ top: '40%', left: '2%', animationDelay: '3s', fontSize: '0.875rem' }}>
+            <div className="floating-tag" style={{ top: '60%', left: '-5%', animationDelay: '3s', fontSize: '0.875rem' }}>
               Advocate
             </div>
-            <div className="floating-tag" style={{ top: '40%', right: '2%', animationDelay: '4.5s', fontSize: '0.875rem' }}>
+            <div className="floating-tag" style={{ top: '60%', right: '-5%', animationDelay: '4.5s', fontSize: '0.875rem' }}>
               Strategize
             </div>
             
