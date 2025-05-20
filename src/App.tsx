@@ -251,7 +251,7 @@ function App() {
       <section className="trusted-section" ref={trustedRef}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 scroll-trigger">
-            Built by <span className="gradient-text">Government Relations Experts</span> from California
+            Built by <span className="gradient-text">Government Relations Experts</span> 
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
