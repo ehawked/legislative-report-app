@@ -244,7 +244,7 @@ function App() {
             
             <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.3s' }}>
               <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
-                <span className="text-purple-600 text-2xl font-bold">$540 M</span>
+                <span className="text-purple-600 text-2xl font-bold">$540M</span>
               </div>
               <h3 className="text-xl font-semibold mb-2">Accuracy Rate</h3>
               <p className="text-gray-600">In legislative analysis and reporting</p>
