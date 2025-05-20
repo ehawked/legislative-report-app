@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legislative Report Dashboard</title>
+    <style>
+        :root {
+            /* Color Scheme */
+            --color-background: #f5f5f5;
+            --color-card: #ffffff;
+            --color-primary: #6a56cf;
+            --color-primary-dark: #4338ca;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --color-text: #171717;
+            --color-text-secondary: #737373;
+            --color-border: #e5e5e5;
+            
+            /* Spacing - Updated for better proximity */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-5: 24px;
+            --space-6: 32px;
+            
+            /* Grid alignment */
+            --grid-gap-sm: 12px;
+            --grid-gap-md: 16px;
+            --grid-gap-lg: 24px;
+            --content-group-spacing: 8px;
+            --section-spacing: 24px;
+            
+            /* Typography */
+            --font-size-xs: 12px;
+            --font-size-sm: 14px;
+            --font-size-base: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 20px;
+            --font-size-2xl: 24px;
+            --font-size-3xl: 30px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            
+            /* Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.5;
+            padding: var(--space-4);
+        }
+        
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+        
+        .dashboard-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--color-text);
+        }
+        
+        .dashboard-controls {
+            display: flex;
+            gap: var(--space-2);
+        }
+        
+        .dashboard-control {
+            background-color: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-2) var(--space-3);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+        
+        .dashboard-control:hover {
+            background-color: var(--color-background);
+        }
+        
+        .dashboard-control.active {
+            background-color: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary-dark);
+        }
+        
+        /* Card Grid Layout - Improved alignment and proximity */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--grid-gap-lg);
+            margin-bottom: var(--section-spacing);
+        }
+        
+        @media (max-width: 1024px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Card Styles - Improved proximity and alignment */
+        .card {
+            background-color: var(--color-card);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            padding: var(--space-4);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-header {
+            margin-bottom: var(--content-group-spacing);
+        }
+        
+        .card-title {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-1);
+            display: block;
+            text-align: left;
+        }
+        
+        .card-value {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--color-text);
+            display: block;
+            text-align: left;
+        }
+        
+        .card-trend {
+            display: inline-flex;
+            align-items: center;
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+            margin-left: var(--space-2);
+        }
+        
+        .card-trend.positive {
+            color: var(--color-success);
+        }
+        
+        .card-trend.negative {
+            color: var(--color-danger);
+        }
+        
+        /* Bill Header Card */
+        .bill-header-card {
+            grid-column: span 4;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .bill-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+        }
+        
+        .bill-subtitle {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-3);
+        }
+        
+        .bill-status {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(106, 86, 207, 0.1);
+            color: var(--color-primary);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-sm);
+        }
+        
+        .bill-status.active {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--color-success);
+        }
+        
+        .bill-status.warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--color-warning);
+        }
+        
+        .bill-status.danger {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--color-danger);
+        }
+        
+        /* Chart Cards - Improved proximity and grouping */
+        .chart-card {
+            grid-column: span 2;
+        }
+        
+        .chart-container {
+            height: 200px;
+            position: relative;
+            margin-top: var(--content-group-spacing);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* Donut Chart - Improved alignment and proximity */
+        .donut-chart {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .donut-chart svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+        
+        .donut-segment {
+            fill: none;
+            stroke-width: 20;
+        }
+        
+        .donut-segment:nth-child(1) {
+            stroke: var(--color-primary);
+        }
+        
+        .donut-segment:nth-child(2) {
+            stroke: var(--color-danger);
+        }
+        
+        .donut-segment:nth-child(3) {
+            stroke: var(--color-text-secondary);
+        }
+        
+        .donut-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .donut-center-value {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+        }
+        
+        .donut-center-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+        }
+        
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--grid-gap-sm);
+            margin-top: var(--content-group-spacing);
+            justify-content: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: var(--font-size-sm);
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            margin-right: var(--space-2);
+        }
+        
+        .legend-color.support {
+            background-color: var(--color-primary);
+        }
+        
+        .legend-color.oppose {
+            background-color: var(--color-danger);
+        }
+        
+        .legend-color.neutral {
+            background-color: var(--color-text-secondary);
+        }
+        
+        /* Timeline Chart - Improved alignment and proximity */
+        .timeline-chart {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: var(--space-2) 0;
+            position: relative;
+            margin-top: var(--content-group-spacing);
+        }
+        
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--color-border);
+            transform: translateY(-50%);
+        }
+        
+        .timeline-progress {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 2px;
+            width: 65%;
+            background-color: var(--color-primary);
+            transform: translateY(-50%);
+        }
+        
+        .timeline-point {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--color-card);
+            border: 2px solid var(--color-primary);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-point.completed {
+            background-color: var(--color-primary);
+        }
+        
+        .timeline-point.current {
+            background-color: var(--color-card);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(106, 86, 207, 0.2);
+        }
+        
+        .timeline-point.future {
+            background-color: var(--color-card);
+            border-color: var(--color-border);
+        }
+        
+        .timeline-markers {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timeline-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
+        }
+        
+        .timeline-label {
+            font-size: var(--font-size-xs);
+            margin-top: var(--space-2);
+            text-align: center;
+            color: var(--color-text-secondary);
+        }
+        
+        .timeline-date {
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+            text-align: center;
+        }
+        
+        /* Bar Chart */
+        .bar-chart {
+            height: 180px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            padding-top: var(--space-4);
+        }
+        
+        .bar {
+            width: 40px;
+            background-color: var(--color-primary);
+            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+            position: relative;
+        }
+        
+        .bar-label {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+        
+        .bar-value {
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+        }
+        
+        /* Table Card - Improved alignment and proximity */
+        .table-card {
+            grid-column: span 4;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-top: var(--content-group-spacing);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        th, td {
+            padding: var(--space-3);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        th {
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            background-color: rgba(106, 86, 207, 0.05);
+        }
+        
+        td {
+            font-size: var(--font-size-sm);
+            vertical-align: top;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Activity Card */
+        .activity-card {
+            grid-column: span 2;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            display: flex;
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(106, 86, 207, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--space-3);
+            flex-shrink: 0;
+        }
+        
+        .activity-icon svg {
+            width: 16px;
+            height: 16px;
+            color: var(--color-primary);
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            margin-bottom: var(--space-1);
+        }
+        
+        .activity-description {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+        }
+        
+        .activity-time {
+            font-size: var(--font-size-xs);
+            color: var(--color-text-secondary);
+            margin-top: var(--space-1);
+        }
+        
+        /* Key Provisions Card */
+        .provisions-card {
+            grid-column: span 2;
+        }
+        
+        .provisions-list {
+            list-style: none;
+        }
+        
+        .provision-item {
+            display: flex;
+            align-items: flex-start;
+            padding: var(--space-2) 0;
+        }
+        
+        .provision-bullet {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            margin-top: 8px;
+            margin-right: var(--space-2);
+            flex-shrink: 0;
+        }
+        
+        .provision-text {
+            font-size: var(--font-size-sm);
+        }
+        
+        /* Fiscal Impact Card */
+        .fiscal-impact-card {
+            grid-column: span 2;
+        }
+        
+        .fiscal-impact-value {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: var(--space-2);
+        }
+        
+        .fiscal-impact-description {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-3);
+        }
+        
+        .fiscal-impact-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+        
+        .fiscal-impact-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-size-sm);
+        }
+        
+        .fiscal-impact-label {
+            color: var(--color-text-secondary);
+        }
+        
+        .fiscal-impact-amount {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Legislative Report Dashboard</h1>
+            <div class="dashboard-controls">
+                <button class="dashboard-control active">Overview</button>
+                <button class="dashboard-control">Analysis</button>
+                <button class="dashboard-control">Full Report</button>
+                <button class="dashboard-control">Export PDF</button>
+            </div>
+        </div>
+        
+        <div class="card-grid">
+            <!-- Bill Header Card -->
+            <div class="card bill-header-card">
+                <div>
+                    <h2 class="bill-title">AB 1122: Dual Enrollment Programs</h2>
+                    <p class="bill-subtitle">Assembly Member Isaac Bryan</p>
+                    <span class="bill-status">In Progress</span>
+                </div>
+                <div>
+                    <p style="text-align: right; font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-1);">Last Updated</p>
+                    <p style="text-align: right; font-weight: 600;">April 30, 2025</p>
+                </div>
+            </div>
+            
+            <!-- Key Metrics Cards -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Support/Opposition Ratio</div>
+                    <div class="card-value">23:1</div>
+                </div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                    23 organizations in support, 1 opposed
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Implementation Timeline</div>
+                    <div class="card-value">2029-30</div>
+                </div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                    Academic year for required implementation
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Current Status</div>
+                    <div class="card-value">Committee</div>
+                </div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                    Hearing canceled at author's request
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">CA Dual Enrollment Rate</div>
+                    <div class="card-value">8%</div>
+                    <span class="card-trend negative">-23% below national avg</span>
+                </div>
+                <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                    31 states have mandatory programs
+                </div>
+            </div>
+            
+            <!-- Stakeholder Support Chart -->
+            <div class="card chart-card">
+                <div class="card-header">
+                    <div class="card-title">Stakeholder Positions</div>
+                </div>
+                <div class="chart-container">
+                    <div class="donut-chart">
+                        <svg viewBox="0 0 100 100">
+                            <!-- Stroke-dasharray: circumference * percentage -->
+                            <!-- Circumference = 2 * PI * (radius - stroke-width/2) -->
+                            <!-- For radius 40, stroke-width 20: circumference ≈ 251.3 -->
+                            <circle class="donut-segment" cx="50" cy="50" r="40" stroke-dasharray="238.7 12.6" stroke-dashoffset="0"></circle>
+                            <circle class="donut-segment" cx="50" cy="50" r="40" stroke-dasharray="12.6 238.7" stroke-dashoffset="-251.3"></circle>
+                        </svg>
+                        <div class="donut-center">
+                            <div class="donut-center-value">95%</div>
+                            <div class="donut-center-label">Support</div>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-color support"></div>
+                            <span>Support (23)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color oppose"></div>
+                            <span>Oppose (1)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Legislative Timeline Chart -->
+            <div class="card chart-card">
+                <div class="card-header">
+                    <div class="card-title">Legislative Progress</div>
+                </div>
+                <div class="chart-container">
+                    <div class="timeline-chart">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-progress"></div>
+                        <div class="timeline-markers">
+                            <div class="timeline-marker">
+                                <div class="timeline-date">Feb 20</div>
+                                <div class="timeline-point completed"></div>
+                                <div class="timeline-label">Introduced</div>
+                            </div>
+                            <div class="timeline-marker">
+                                <div class="timeline-date">Mar 10</div>
+                                <div class="timeline-point completed"></div>
+                                <div class="timeline-label">Referred</div>
+                            </div>
+                            <div class="timeline-marker">
+                                <div class="timeline-date">Apr 8</div>
+                                <div class="timeline-point completed"></div>
+                                <div class="timeline-label">Committee</div>
+                            </div>
+                            <div class="timeline-marker">
+                                <div class="timeline-date">Apr 30</div>
+                                <div class="timeline-point current"></div>
+                                <div class="timeline-label">Canceled</div>
+                            </div>
+                            <div class="timeline-marker">
+                                <div class="timeline-date">TBD</div>
+                                <div class="timeline-point future"></div>
+                                <div class="timeline-label">Floor Vote</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Key Provisions Card -->
+            <div class="card provisions-card">
+                <div class="card-header">
+                    <div class="card-title">Key Provisions</div>
+                </div>
+                <ul class="provisions-list">
+                    <li class="provision-item">
+                        <div class="provision-bullet"></div>
+                        <div class="provision-text">Requires LEAs without dual enrollment to establish programs by 2029-30</div>
+                    </li>
+                    <li class="provision-item">
+                        <div class="provision-bullet"></div>
+                        <div class="provision-text">Mandates courses lead to degree, credential, certificate, or transfer</div>
+                    </li>
+                    <li class="provision-item">
+                        <div class="provision-bullet"></div>
+                        <div class="provision-text">Requires partnerships through CCAP or early/middle college high schools</div>
+                    </li>
+                    <li class="provision-item">
+                        <div class="provision-bullet"></div>
+                        <div class="provision-text">Provides state reimbursement for mandated costs</div>
+                    </li>
+                    <li class="provision-item">
+                        <div class="provision-bullet"></div>
+                        <div class="provision-text">Strengthens requirements from "encourage" to "require" partnerships</div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Fiscal Impact Card -->
+            <div class="card fiscal-impact-card">
+                <div class="card-header">
+                    <div class="card-title">Fiscal Impact</div>
+                </div>
+                <div class="fiscal-impact-value">Indeterminate</div>
+                <div class="fiscal-impact-description">Subject to determination by Commission on State Mandates</div>
+                <div class="fiscal-impact-breakdown">
+                    <div class="fiscal-impact-item">
+                        <span class="fiscal-impact-label">Implementation Costs</span>
+                        <span class="fiscal-impact-amount">$$ - $$$</span>
+                    </div>
+                    <div class="fiscal-impact-item">
+                        <span class="fiscal-impact-label">Instructor Resources</span>
+                        <span class="fiscal-impact-amount">$$ - $$$</span>
+                    </div>
+                    <div class="fiscal-impact-item">
+                        <span class="fiscal-impact-label">Administrative Support</span>
+                        <span class="fiscal-impact-amount">$ - $$</span>
+                    </div>
+                    <div class="fiscal-impact-item">
+                        <span class="fiscal-impact-label">State Reimbursement</span>
+                        <span class="fiscal-impact-amount">$$$ - $$$$</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stakeholder Table -->
+            <div class="card table-card">
+                <div class="card-header">
+                    <div class="card-title">Key Stakeholder Positions</div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Organization</th>
+                                <th>Position</th>
+                                <th>Key Concerns/Support</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>California Chamber of Commerce</td>
+                                <td style="color: var(--color-success); font-weight: 600;">Support</td>
+                                <td>Workforce development, college readiness</td>
+                            </tr>
+                            <tr>
+                                <td>California State PTA</td>
+                                <td style="color: var(--color-success); font-weight: 600;">Support</td>
+                                <td>Educational opportunity, college access</td>
+                            </tr>
+                            <tr>
+                                <td>CFT - Union of Educators</td>
+                                <td style="color: var(--color-danger); font-weight: 600;">Oppose</td>
+                                <td>Faculty workload, governance concerns</td>
+                            </tr>
+                            <tr>
+                                <td>Campaign for College Opportunity</td>
+                                <td style="color: var(--color-success); font-weight: 600;">Support</td>
+                                <td>Equity in higher education access</td>
+                            </tr>
+                            <tr>
+                                <td>California High School District Coalition</td>
+                                <td style="color: var(--color-success); font-weight: 600;">Support</td>
+                                <td>Student success, pathway development</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Recent Activity Card -->
+            <div class="card activity-card">
+                <div class="card-header">
+                    <div class="card-title">Recent Legislative Activity</div>
+                </div>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Committee Hearing Canceled</div>
+                            <div class="activity-description">Hearing in Committee on Education canceled at request of author</div>
+                            <div class="activity-time">April 30, 2025</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                            </svg>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Bill Amended</div>
+                            <div class="activity-description">Read second time and amended</div>
+                            <div class="activity-time">April 10, 2025</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Committee Recommendation</div>
+                            <div class="activity-description">Amend, and do pass as amended and re-refer to Committee on Education (Ayes 9, Noes 0)</div>
+                            <div class="activity-time">April 9, 2025</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Analysis Card -->
+            <div class="card activity-card">
+                <div class="card-header">
+                    <div class="card-title">Key Analysis Points</div>
+                </div>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Participation Gap</div>
+                            <div class="activity-description">CA dual enrollment (8%) lags behind other states, placing California in the bottom tier nationally</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Equity Concerns</div>
+                            <div class="activity-description">Access shows racial/ethnic disparities with Black and Latino students underrepresented in dual enrollment programs</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Implementation Challenges</div>
+                            <div class="activity-description">Rural districts face significant challenges with limited access to community colleges</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

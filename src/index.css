@@ -1,0 +1,287 @@
+/* Import custom styles */
+@import './components/layout.css';
+@import './components/contrast.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 100% 52%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 262 83% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 262 83% 58%;
+    --radius: 0.5rem;
+    --success: 165 100% 38%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  body {
+    @apply bg-white text-[#1A1A1A];
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom styles for the legislative report app */
+.hero-section {
+  @apply relative overflow-hidden bg-gradient-to-br from-white to-[#F0F5FF] text-[#1A1A1A] min-h-screen flex items-center;
+}
+
+.hero-pattern {
+  @apply absolute inset-0 opacity-5;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.feature-card {
+  @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100 hover:border-purple-500/30 transform hover:-translate-y-1;
+}
+
+.form-container {
+  @apply bg-white rounded-xl shadow-lg p-8 border border-gray-100;
+}
+
+.bill-input {
+  @apply text-lg font-medium;
+}
+
+.loading-animation {
+  @apply animate-pulse;
+}
+
+.success-animation {
+  @apply animate-bounce;
+}
+
+.glass-card {
+  @apply bg-white/90 backdrop-blur-md border border-gray-100 shadow-xl;
+}
+
+.horizontal-scroll-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+.horizontal-scroll-item {
+  flex: 0 1 320px;
+  display: flex;
+}
+
+.gradient-text {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-indigo-800;
+}
+
+.gradient-border {
+  @apply border border-transparent bg-gradient-to-r from-purple-700 to-indigo-800 bg-clip-border;
+}
+
+.gradient-button {
+  @apply relative overflow-hidden transition-all duration-300;
+  background: linear-gradient(90deg, #6E56CF, #4338CA);
+}
+
+.gradient-button:hover {
+  background: linear-gradient(90deg, #6E56CF, #4338CA);
+  box-shadow: 0 0 20px rgba(110, 86, 207, 0.5);
+  transform: translateY(-2px);
+}
+
+.animated-bg {
+  @apply absolute inset-0 -z-10;
+  background: linear-gradient(40deg, #FFFFFF, #F0F5FF, #FFFFFF);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F0F2F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6E56CF;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4338CA;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.typing-animation::after {
+  content: '|';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.progress-bar {
+  @apply fixed top-0 left-0 h-1 bg-gradient-to-r from-purple-700 to-indigo-800 z-50;
+  width: var(--scroll-width, 0%);
+}
+
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #6E56CF;
+  animation: confetti 5s ease-in-out infinite;
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Voice-inspired styles */
+.massive-text {
+  @apply text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold tracking-tight leading-none;
+}
+
+.floating-tag {
+  @apply absolute bg-white px-3 py-1 rounded-full text-sm font-medium shadow-md;
+  animation: floatingTag 5s ease-in-out infinite;
+}
+
+@keyframes floatingTag {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  33% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  66% {
+    transform: translateY(5px) translateX(-5px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+.parallax-bg {
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.scroll-trigger {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-trigger.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trusted-section {
+  @apply py-16 px-4 sm:px-6 lg:px-8 bg-white;
+}
