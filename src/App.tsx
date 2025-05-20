@@ -294,7 +294,7 @@ function App() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Focused Data</h3>
-                <p className="text-gray-600">Consoldate public data and expert analysis to provide a comprehensive view of the legislative landscape</p>
+                <p className="text-gray-600">Consolidate public data and expert analysis to provide a comprehensive view of the legislative landscape</p>
               </Card>
             </div>
             
