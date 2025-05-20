@@ -8,7 +8,7 @@ const SampleReportPreview: React.FC = () => {
       </div>
       
       <div className="report-header">
-        <h1>California AB-123: Clean Energy Investment Act</h1>
+        <h1>California SB 226: Community colleges: territory transfers between districts</h1>
         <p className="text-gray-600">Comprehensive Legislative Analysis</p>
       </div>
       
@@ -21,7 +21,7 @@ const SampleReportPreview: React.FC = () => {
           </div>
           <h2>Bill Overview</h2>
           <ul className="report-list">
-            <li>Introduced by Assemblymember Johnson on January 15, 2025</li>
+            <li>Introduced by Senator Christopher Cabaldon on January 28, 2025</li>
             <li>Allocates $2.5 billion for renewable energy infrastructure</li>
             <li>Creates tax incentives for clean energy businesses</li>
             <li>Establishes oversight committee for fund distribution</li>
