@@ -235,7 +235,7 @@ function App() {
                 <div className="gradient-text">Amplified</div>
               </h1>
               <p className="mt-6 text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto fade-in">
-                We transform complex bills and political landscapes into strategic intelligence, helping you focus on the legislation that matters while filtering out the noise
+                We transform complex bills and political landscapes into strategic intelligence, helping you only focus on the legislation that matters
               </p>
             </div>
           </div>
