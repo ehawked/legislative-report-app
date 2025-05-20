@@ -286,7 +286,7 @@ function App() {
       <section className="sample-preview-section py-20">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 sample-preview-heading scroll-trigger">
-            <span className="gradient-text">Premium</span> Legislative Reports
+            <span className="gradient-text">Executive</span> Legislative Reports
           </h2>
           <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto scroll-trigger" style={{ transitionDelay: '0.2s' }}>
             Our reports provide comprehensive analysis and actionable insights
