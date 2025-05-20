@@ -246,7 +246,7 @@ function App() {
               <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
                 <span className="text-purple-600 text-2xl font-bold">$540M</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Spent to influence state officials and legislation</h3>
+              <h3 className="text-xl font-semibold mb-2">Spent to Influence State Officials and Legislation</h3>
               <p className="text-gray-600">In legislative analysis and reporting</p>
             </Card>
             
