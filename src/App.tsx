@@ -214,16 +214,16 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="relative">
             {/* Floating tags */}
-            <div className="floating-tag" style={{ top: '5%', left: '10%', animationDelay: '0s' }}>
+            <div className="floating-tag" style={{ top: '-5%', left: '5%', animationDelay: '0s', fontSize: '0.875rem' }}>
               Analyze
             </div>
-            <div className="floating-tag" style={{ top: '15%', right: '15%', animationDelay: '1.5s' }}>
+            <div className="floating-tag" style={{ top: '-5%', right: '5%', animationDelay: '1.5s', fontSize: '0.875rem' }}>
               Inform
             </div>
-            <div className="floating-tag" style={{ bottom: '10%', left: '20%', animationDelay: '3s' }}>
+            <div className="floating-tag" style={{ top: '40%', left: '2%', animationDelay: '3s', fontSize: '0.875rem' }}>
               Advocate
             </div>
-            <div className="floating-tag" style={{ bottom: '20%', right: '10%', animationDelay: '4.5s' }}>
+            <div className="floating-tag" style={{ top: '40%', right: '2%', animationDelay: '4.5s', fontSize: '0.875rem' }}>
               Strategize
             </div>
             
