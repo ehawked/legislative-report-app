@@ -247,7 +247,7 @@ function App() {
                 <span className="text-purple-600 text-2xl font-bold">$540M</span>
               </div>
               <h3 className="text-xl font-semibold mb-2">Spent to Influence State Officials and Legislation</h3>
-              <p className="text-gray-600">In legislative analysis and reporting</p>
+              <p className="text-gray-600">Does your data tell you how dollars are moving policy?</p>
             </Card>
             
             <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.5s' }}>
