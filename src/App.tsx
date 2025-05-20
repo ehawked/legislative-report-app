@@ -236,10 +236,10 @@ function App() {
           <div className="grid md:grid-cols-3 gap-8">
             <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.1s' }}>
               <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                <span className="text-blue-600 text-2xl font-bold">500+</span>
+                <span className="text-blue-600 text-2xl font-bold">2500+</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Bills Analyzed</h3>
-              <p className="text-gray-600">Every month across multiple states</p>
+              <h3 className="text-xl font-semibold mb-2">Bills Introduced Each Year</h3>
+              <p className="text-gray-600">In California alone. Do you need data on all of them?</p>
             </Card>
             
             <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.3s' }}>
