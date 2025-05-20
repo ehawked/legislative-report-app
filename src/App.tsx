@@ -238,7 +238,7 @@ function App() {
               <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
                 <span className="text-blue-600 text-2xl font-bold">2500+</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Bills Introduced Each Year</h3>
+              <h3 className="text-xl font-semibold mb-2">Bills Introduced Annually</h3>
               <p className="text-gray-600">Do you really need data on all of them?</p>
             </Card>
             
