@@ -76,12 +76,7 @@ const SampleReportPreview: React.FC = () => {
               <li>City of West Sacramento</li>
               <li>City of Woodland</li>
               <li>County of Yolo</li>
-              <li>Esparto Unified School District</li>
-              <li>Washington Unified School District</li>
-              <li>Winters Joint Unified School District</li>
-              <li>Woodland Joint Unified School District</li>
-              <li>Yolo County Office of Education</li>
-              <li>La Cooperativa Campesina de California</li>
+              <li className="text-gray-600 italic">+6 more organizations</li>
             </ul>
           </div>
           <div className="stakeholder-section">
