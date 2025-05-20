@@ -227,6 +227,21 @@ function App() {
         </div>
       </section>
 
+      <section className="sample-preview-section py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 sample-preview-heading scroll-trigger">
+            <span className="gradient-text">Executive</span> Legislative Reports
+          </h2>
+          <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto scroll-trigger" style={{ transitionDelay: '0.2s' }}>
+            Our reports provide comprehensive analysis and actionable insights
+          </p>
+          
+          <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
+            <SampleReportPreview />
+          </div>
+        </div>
+      </section>
+
       <section className="trusted-section" ref={trustedRef}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 scroll-trigger">
@@ -257,21 +272,6 @@ function App() {
               <h3 className="text-xl font-semibold mb-2">Lobbying Firms</h3>
               <p className="text-gray-600">Rely on our legislative intelligence</p>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      <section className="sample-preview-section py-20">
-        <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 sample-preview-heading scroll-trigger">
-            <span className="gradient-text">Executive</span> Legislative Reports
-          </h2>
-          <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto scroll-trigger" style={{ transitionDelay: '0.2s' }}>
-            Our reports provide comprehensive analysis and actionable insights
-          </p>
-          
-          <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
-            <SampleReportPreview />
           </div>
         </div>
       </section>
