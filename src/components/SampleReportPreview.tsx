@@ -22,9 +22,9 @@ const SampleReportPreview: React.FC = () => {
           <h2>Bill Overview</h2>
           <ul className="report-list">
             <li>Introduced by Senator Christopher Cabaldon on January 28, 2025</li>
-            <li>Allocates $2.5 billion for renewable energy infrastructure</li>
-            <li>Creates tax incentives for clean energy businesses</li>
-            <li>Establishes oversight committee for fund distribution</li>
+            <li>Establishes an alternative process for California Community College district territory transfers</li>
+            <li>Specifically targets transfers between districts in counties with multiple CCC districts</li>
+            <li>Current status: In Progress (Set for hearing May 23, 2025)</li>
           </ul>
         </div>
         
@@ -36,10 +36,10 @@ const SampleReportPreview: React.FC = () => {
           </div>
           <h2>Key Provisions</h2>
           <ul className="report-list">
-            <li>Section 1: $1.2B for solar infrastructure development</li>
-            <li>Section 2: $800M for wind energy projects</li>
-            <li>Section 3: $500M for energy storage research</li>
-            <li>Section 4: Tax credits for businesses (10-25%)</li>
+            <li>Authorizes the Board of Governors to approve territory transfers without the standard petition process</li>
+            <li>Applies to districts in counties divided among three or more CCC districts where majority of residents are in other counties</li>
+            <li>Ensures employee classification and rights are protected during transfers</li>
+            <li>Allows territory transfers to be approved without election</li>
           </ul>
         </div>
         
@@ -50,24 +50,17 @@ const SampleReportPreview: React.FC = () => {
             </svg>
           </div>
           <h2>Fiscal Impact</h2>
-          <p>Projected economic impact over 5 years:</p>
-          <div className="chart-container">
-            <div className="chart-bar" style={{ height: '60%' }}>
-              <div className="chart-label">2025</div>
-            </div>
-            <div className="chart-bar" style={{ height: '75%' }}>
-              <div className="chart-label">2026</div>
-            </div>
-            <div className="chart-bar" style={{ height: '90%' }}>
-              <div className="chart-label">2027</div>
-            </div>
-            <div className="chart-bar" style={{ height: '100%' }}>
-              <div className="chart-label">2028</div>
-            </div>
-            <div className="chart-bar" style={{ height: '110%' }}>
-              <div className="chart-label">2029</div>
-            </div>
-          </div>
+          <p>Projected economic impact:</p>
+          <ul className="report-list">
+            <li>Minor state-level Proposition 98 General Fund costs</li>
+            <li>Chancellor's Office one-time costs of $33,000 to $53,000 for petition review</li>
+            <li>Significant potential local costs:</li>
+            <ul className="report-list ml-4">
+              <li>Employment benefit liabilities (long-term)</li>
+              <li>Technology and systems integration (one-time)</li>
+              <li>Facilities and infrastructure adjustments</li>
+            </ul>
+          </ul>
         </div>
         
         <div className="report-card">
@@ -80,16 +73,23 @@ const SampleReportPreview: React.FC = () => {
           <div className="stakeholder-section">
             <h3>Support:</h3>
             <ul className="report-list">
-              <li>California Clean Energy Coalition</li>
-              <li>Sierra Club</li>
-              <li>Tech Industry Association</li>
+              <li>City of West Sacramento</li>
+              <li>City of Woodland</li>
+              <li>County of Yolo</li>
+              <li>Esparto Unified School District</li>
+              <li>Washington Unified School District</li>
+              <li>Winters Joint Unified School District</li>
+              <li>Woodland Joint Unified School District</li>
+              <li>Yolo County Office of Education</li>
+              <li>La Cooperativa Campesina de California</li>
             </ul>
           </div>
           <div className="stakeholder-section">
             <h3>Opposition:</h3>
             <ul className="report-list">
-              <li>Petroleum Association</li>
-              <li>Taxpayers Alliance</li>
+              <li>Cabrillo Community College District</li>
+              <li>CFT - a Union of Educators & Classified Professionals</li>
+              <li>Community College League of California</li>
             </ul>
           </div>
         </div>
@@ -102,11 +102,11 @@ const SampleReportPreview: React.FC = () => {
           </div>
           <h2>Political Analysis</h2>
           <ul className="report-list">
-            <li>Strong support from Democratic caucus (92%)</li>
-            <li>Mixed reception from Republicans (35% support)</li>
-            <li>Governor has signaled support if passed</li>
-            <li>Key committee vote expected on June 15</li>
-            <li>Floor vote projected for early July</li>
+            <li>Strong committee support with 5-2 vote in Senate Education Committee</li>
+            <li>7-0 vote to place on suspense file in Senate Appropriations Committee</li>
+            <li>Primary intent is to streamline transfer of Woodland College from Yuba Community College District to Los Rios Community College District</li>
+            <li>Reduces Yuba CCD to one college (Yuba College)</li>
+            <li>Expands Los Rios CCD from four to five colleges</li>
           </ul>
         </div>
         
@@ -118,11 +118,10 @@ const SampleReportPreview: React.FC = () => {
           </div>
           <h2>Strategic Recommendations</h2>
           <ul className="report-list">
-            <li>Focus advocacy on moderate Republicans</li>
-            <li>Emphasize job creation aspects in communications</li>
-            <li>Prepare amendments for Section 4 tax provisions</li>
-            <li>Engage with Appropriations Committee members</li>
-            <li>Develop coalition with tech industry stakeholders</li>
+            <li>Focus advocacy on educational access improvements for Yolo County residents</li>
+            <li>Emphasize local community and government support in communications</li>
+            <li>Address concerns about employee protections during transfer process</li>
+            <li>Prepare for potential amendments regarding fiscal impact analysis requirements</li>
           </ul>
         </div>
       </div>
