@@ -239,7 +239,7 @@ function App() {
                 <span className="text-blue-600 text-2xl font-bold">2500+</span>
               </div>
               <h3 className="text-xl font-semibold mb-2">Bills Introduced Each Year</h3>
-              <p className="text-gray-600">In California alone. Do you need data on all of them?</p>
+              <p className="text-gray-600">Do you really need data on all of them?</p>
             </Card>
             
             <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.3s' }}>
