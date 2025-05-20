@@ -341,7 +341,7 @@ function App() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Customizable Reports</h3>
-                <p className="text-gray-600">Tailor reports to your specific needs and organizational requirements</p>
+                <p className="text-gray-600">Tailor reports to your specific needs, policy area and organizational requirements</p>
               </Card>
             </div>
           </div>
