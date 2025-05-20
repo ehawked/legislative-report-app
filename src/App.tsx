@@ -11,7 +11,6 @@ import { generateReport, downloadPdf, type ReportRequest } from './lib/webhookSe
 
 function App() {
   const [webhookUrl, setWebhookUrl] = useState<string>(() => {
-    // Try to load from localStorage on initial render
     return localStorage.getItem('webhookUrl') || '';
   });
   const [billNumber, setBillNumber] = useState('');
@@ -25,37 +24,29 @@ function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showPreview, setShowPreview] = useState(false);
   
-  // Refs for scroll animations
   const featuresRef = React.useRef<HTMLDivElement>(null);
   const howItWorksRef = React.useRef<HTMLDivElement>(null);
   const generateReportRef = React.useRef<HTMLDivElement>(null);
   const trustedRef = React.useRef<HTMLDivElement>(null);
   
-  // Parallax effect for hero section
   const [offsetY, setOffsetY] = useState(0);
 
-  // Save webhook URL to localStorage whenever it changes
   useEffect(() => {
     if (webhookUrl) {
       localStorage.setItem('webhookUrl', webhookUrl);
     }
   }, [webhookUrl]);
   
-  // Handle scroll effects
   useEffect(() => {
-    // Scroll to top on mount
     window.scrollTo(0, 0);
 
     const handleScroll = () => {
-      // Update scroll progress
       const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
       
-      // Update parallax offset
       setOffsetY(window.pageYOffset);
       
-      // Handle scroll trigger animations
       const triggerElements = document.querySelectorAll('.scroll-trigger');
       triggerElements.forEach(el => {
         const elementTop = el.getBoundingClientRect().top;
@@ -74,14 +65,12 @@ function App() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate bill number format (e.g., AB-123, SB-456)
     const billRegex = /^(AB|SB)-\d+$/i;
     if (!billRegex.test(billNumber)) {
       setError('Please enter a valid bill number format (e.g., AB-123, SB-456)');
       return;
     }
     
-    // Validate webhook URL is configured
     if (!webhookUrl) {
       setError('Please configure the n8n webhook URL first');
       return;
@@ -91,7 +80,6 @@ function App() {
     setError('');
     
     try {
-      // Prepare the request data
       const requestData: ReportRequest = {
         billNumber,
         name: name || undefined,
@@ -99,16 +87,13 @@ function App() {
         email: email || undefined
       };
       
-      // In development/demo mode, simulate the API call
       if (process.env.NODE_ENV === 'development' || !webhookUrl.includes('http')) {
-        // Simulate API call with timeout
         setTimeout(() => {
           setIsLoading(false);
           setIsSuccess(true);
-          setPdfUrl('/sample-report.pdf'); // This would be the actual PDF URL from your webhook
+          setPdfUrl('/sample-report.pdf');
           setShowPreview(true);
           
-          // Store user data for analytics (in a real app, send to backend)
           const userData = {
             ...requestData,
             timestamp: new Date().toISOString()
@@ -116,7 +101,6 @@ function App() {
           console.log('User data collected:', userData);
         }, 2000);
       } else {
-        // Make the actual API call to the webhook
         const response = await generateReport(webhookUrl, requestData);
         
         if (response.success && response.pdfUrl) {
@@ -125,7 +109,6 @@ function App() {
           setPdfUrl(response.pdfUrl);
           setShowPreview(true);
           
-          // Store user data for analytics
           const userData = {
             ...requestData,
             timestamp: new Date().toISOString()
@@ -161,10 +144,8 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col text-[#1A1A1A]">
-      {/* Scroll Progress Bar */}
       <div className="progress-bar" style={{ width: `${scrollProgress}%` }}></div>
       
-      {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -207,13 +188,11 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <section className="hero-section pt-16">
         <div className="animated-bg parallax-bg" style={{ transform: `translateY(${offsetY * 0.2}px)` }}></div>
         <div className="hero-pattern"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="relative">
-            {/* Floating tags */}
             <div className="floating-tag" style={{ top: '-5%', left: '5%', animationDelay: '0s', fontSize: '0.875rem' }}>
               Analyze
             </div>
@@ -227,16 +206,17 @@ function App() {
               Strategize
             </div>
             
-            {/* Main headline */}
             <div className="text-center mb-12">
               <h1 className="massive-text mb-6">
                 <div>Your</div>
                 <div>Legislation,</div>
                 <div className="gradient-text">Amplified</div>
               </h1>
-              <p className="mt-6 text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto fade-in">
-                We transform complex bills and political landscapes into strategic intelligence, helping you only focus on the legislation that matters
-              </p>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 max-w-3xl mx-auto">
+                <p className="text-xl md:text-2xl text-gray-600 fade-in">
+                  We transform complex bills and political landscapes into strategic intelligence, helping you only focus on the legislation that matters
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -247,7 +227,6 @@ function App() {
         </div>
       </section>
 
-      {/* Trusted Section */}
       <section className="trusted-section" ref={trustedRef}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 scroll-trigger">
@@ -282,7 +261,6 @@ function App() {
         </div>
       </section>
 
-      {/* Sample Report Preview Section */}
       <section className="sample-preview-section py-20">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 sample-preview-heading scroll-trigger">
@@ -298,7 +276,6 @@ function App() {
         </div>
       </section>
 
-      {/* Value Proposition */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F0F5FF]" ref={featuresRef}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 scroll-trigger">
@@ -348,7 +325,6 @@ function App() {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8" ref={howItWorksRef}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 scroll-trigger">
@@ -380,7 +356,6 @@ function App() {
         </div>
       </section>
 
-      {/* Generate Report Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#F0F5FF]" ref={generateReportRef}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 scroll-trigger">
@@ -419,7 +394,6 @@ function App() {
             </div>
           </div>
           
-          {/* Report Preview */}
           {showPreview && (
             <div className="mt-16 scroll-trigger" style={{ transitionDelay: '0.2s' }}>
               <ReportPreview billNumber={billNumber} />
@@ -428,7 +402,6 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
