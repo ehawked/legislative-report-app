@@ -12,10 +12,10 @@ const FeaturesCarousel = () => {
         setSelectedIndex(emblaApi.selectedScrollSnap());
       });
       
-      // Auto-advance every 5 seconds
+      // Auto-advance every 10 seconds
       const interval = setInterval(() => {
         emblaApi.scrollNext();
-      }, 5000);
+      }, 10000);
       
       return () => {
         clearInterval(interval);
@@ -25,7 +25,7 @@ const FeaturesCarousel = () => {
   }, [emblaApi]);
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden bg-[#F0F5FF]">
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 flex gap-2">
         {[0, 1].map((idx) => (
           <button
@@ -34,6 +34,7 @@ const FeaturesCarousel = () => {
               idx === selectedIndex ? 'bg-purple-600 w-4' : 'bg-gray-300'
             }`}
             onClick={() => emblaApi?.scrollTo(idx)}
+            aria-label={`Go to slide ${idx + 1}`}
           />
         ))}
       </div>
@@ -76,7 +77,7 @@ const FeaturesCarousel = () => {
           </div>
 
           {/* Second Slide: Unparalleled Legislative Intelligence */}
-          <div className="flex-[0_0_100%] min-w-0 bg-[#F0F5FF]">
+          <div className="flex-[0_0_100%] min-w-0">
             <div className="max-w-7xl mx-auto px-4 py-20">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
                 <span className="gradient-text">Unparalleled</span> Legislative Intelligence
