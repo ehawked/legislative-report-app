@@ -8,6 +8,13 @@ import Button from './components/Button';
 import Card from './components/Card';
 import './components/ReportPreview.css';
 import { generateReport, downloadPdf, type ReportRequest } from './lib/webhookService';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 function App() {
   const [webhookUrl, setWebhookUrl] = useState<string>(() => {
@@ -142,6 +149,54 @@ function App() {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const trustedCards = [
+    {
+      number: "2500+",
+      title: "Bills Introduced Annually",
+      description: "Are you wasting resources by paying to track bills that will never impact your priorities?",
+      color: "blue"
+    },
+    {
+      number: "$540M",
+      title: "Spent to Influence State Officials and Legislation",
+      description: "Does your data tell you how dollars are moving policy?",
+      color: "purple"
+    },
+    {
+      number: "2000+",
+      title: "Legislative Staff",
+      description: "Is your command of legislative details sufficient to stand out amid the noise of competing advocates?",
+      color: "blue"
+    }
+  ];
+
+  const featureCards = [
+    {
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      ),
+      title: "Focused Data",
+      description: "Consolidate public data and expert analysis to provide a comprehensive view of the legislative landscape",
+      color: "blue"
+    },
+    {
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      ),
+      title: "Instant Analysis",
+      description: "Instantly produce polished, detailed reports designed for seamless distribution to members, stakeholders, and public audiences",
+      color: "purple"
+    },
+    {
+      icon: (
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+      ),
+      title: "Customizable Reports",
+      description: "Tailor reports to your specific needs, policy area and organizational requirements",
+      color: "purple"
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col text-[#1A1A1A]">
       <div className="progress-bar" style={{ width: `${scrollProgress}%` }}></div>
@@ -248,31 +303,29 @@ function App() {
             Built by <span className="gradient-text">Government Relations Experts</span> 
           </h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.1s' }}>
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                <span className="text-blue-600 text-2xl font-bold">2500+</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Bills Introduced Annually</h3>
-              <p className="text-gray-600">Are you wasting resources by paying to track bills that will never impact your priorities?</p>
-            </Card>
-            
-            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.3s' }}>
-              <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
-                <span className="text-purple-600 text-2xl font-bold">$540M</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Spent to Influence State Officials and Legislation</h3>
-              <p className="text-gray-600">Does your data tell you how dollars are moving policy?</p>
-            </Card>
-            
-            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.5s' }}>
-              <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                <span className="text-blue-600 text-2xl font-bold">2000+</span>
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Legislative Staff</h3>
-              <p className="text-gray-600">Is your command of legislative details sufficient to stand out amid the noise of competing advocates?</p>
-            </Card>
-          </div>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {trustedCards.map((card, index) => (
+                <CarouselItem key={index} className="md:basis-1/3">
+                  <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: `${index * 0.2}s` }}>
+                    <div className={`w-16 h-16 rounded-full bg-${card.color}-100 flex items-center justify-center mx-auto mb-4`}>
+                      <span className={`text-${card.color}-600 text-2xl font-bold`}>{card.number}</span>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
+                    <p className="text-gray-600">{card.description}</p>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
 
@@ -285,43 +338,31 @@ function App() {
             Harness powerful legislative insights and comprehensive analysis to position your organization ahead of industry peers
           </p>
           
-          <div className="horizontal-scroll-container">
-            <div className="horizontal-scroll-item">
-              <Card variant="feature" className="h-full scroll-trigger" style={{ transitionDelay: '0.3s' }}>
-                <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Focused Data</h3>
-                <p className="text-gray-600">Consolidate public data and expert analysis to provide a comprehensive view of the legislative landscape</p>
-              </Card>
-            </div>
-            
-            <div className="horizontal-scroll-item">
-              <Card variant="feature" className="h-full scroll-trigger" style={{ transitionDelay: '0.4s' }}>
-                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Instant Analysis</h3>
-                <p className="text-gray-600">Instantly produce polished, detailed reports designed for seamless distribution to members, stakeholders, and public audiences</p>
-              </Card>
-            </div>
-            
-            <div className="horizontal-scroll-item">
-              <Card variant="feature" className="h-full scroll-trigger" style={{ transitionDelay: '0.6s' }}>
-                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-4">
-                  <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">Customizable Reports</h3>
-                <p className="text-gray-600">Tailor reports to your specific needs, policy area and organizational requirements</p>
-              </Card>
-            </div>
-          </div>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {featureCards.map((card, index) => (
+                <CarouselItem key={index} className="md:basis-1/3">
+                  <Card variant="feature" className="h-full scroll-trigger" style={{ transitionDelay: `${index * 0.2}s` }}>
+                    <div className={`w-12 h-12 rounded-full bg-${card.color}-500/20 flex items-center justify-center mb-4`}>
+                      <svg className={`w-6 h-6 text-${card.color}-500`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        {card.icon}
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
+                    <p className="text-gray-600">{card.description}</p>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
 
