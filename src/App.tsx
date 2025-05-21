@@ -267,10 +267,10 @@ function App() {
             
             <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.5s' }}>
               <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                <span className="text-blue-600 text-2xl font-bold">150+</span>
+                <span className="text-blue-600 text-2xl font-bold">2000+</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Lobbying Firms</h3>
-              <p className="text-gray-600">Rely on our legislative intelligence</p>
+              <h3 className="text-xl font-semibold mb-2">Legislative Staff</h3>
+              <p className="text-gray-600">Is your command of legislative details sufficient to stand out amid the noise of competing advocates</p>
             </Card>
           </div>
         </div>
