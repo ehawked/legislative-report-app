@@ -5,6 +5,15 @@ import Card from './Card';
 const FeaturesCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [autoplayInterval, setAutoplayInterval] = React.useState<NodeJS.Timeout | null>(null);
+
+  const startAutoplay = React.useCallback(() => {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+    const interval = setInterval(() => {
+      if (emblaApi) emblaApi.scrollNext();
+    }, 10000);
+    setAutoplayInterval(interval);
+  }, [emblaApi, autoplayInterval]);
 
   React.useEffect(() => {
     if (emblaApi) {
@@ -12,17 +21,21 @@ const FeaturesCarousel = () => {
         setSelectedIndex(emblaApi.selectedScrollSnap());
       });
       
-      // Auto-advance every 10 seconds
-      const interval = setInterval(() => {
-        emblaApi.scrollNext();
-      }, 10000);
+      startAutoplay();
       
       return () => {
-        clearInterval(interval);
+        if (autoplayInterval) clearInterval(autoplayInterval);
         emblaApi.off('select');
       };
     }
-  }, [emblaApi]);
+  }, [emblaApi, autoplayInterval, startAutoplay]);
+
+  const handleSlideClick = (index: number) => {
+    if (emblaApi) {
+      emblaApi.scrollTo(index);
+      startAutoplay(); // Reset timer when manually navigating
+    }
+  };
 
   return (
     <div className="relative overflow-hidden bg-[#F0F5FF]">
@@ -33,7 +46,7 @@ const FeaturesCarousel = () => {
             className={`w-2 h-2 rounded-full transition-all ${
               idx === selectedIndex ? 'bg-purple-600 w-4' : 'bg-gray-300'
             }`}
-            onClick={() => emblaApi?.scrollTo(idx)}
+            onClick={() => handleSlideClick(idx)}
             aria-label={`Go to slide ${idx + 1}`}
           />
         ))}
