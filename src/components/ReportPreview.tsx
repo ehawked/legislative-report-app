@@ -1,166 +1,193 @@
-import React, { useState } from 'react';
-import { ReactSortable } from 'react-sortablejs';
+// src/components/ReportPreview.tsx
+
+import React from 'react';
 
 interface ReportPreviewProps {
   billNumber: string;
 }
 
-interface CardItem {
-  id: string;
-  name: string;
-}
-
-const ReportPreview: React.FC<ReportPreviewProps> = ({ billNumber }) => {
-  const [cardOrder, setCardOrder] = useState<CardItem[]>([
-    { id: 'billOverview', name: 'billOverview' },
-    { id: 'keyProvisions', name: 'keyProvisions' },
-    { id: 'fiscalImpact', name: 'fiscalImpact' },
-    { id: 'stakeholderPositions', name: 'stakeholderPositions' },
-    { id: 'politicalAnalysis', name: 'politicalAnalysis' },
-    { id: 'strategicRecommendations', name: 'strategicRecommendations' }
-  ]);
-
-  const cards = {
-    billOverview: (
-      <div className="report-card" data-id="billOverview">
-        <div className="report-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <h2>Bill Overview</h2>
-        <ul className="report-list">
-          <li>Introduced by Senator Christopher Cabaldon on January 28, 2025</li>
-          <li>Establishes an alternative process for California Community College district territory transfers</li>
-          <li>Specifically targets transfers between districts in counties with multiple CCC districts</li>
-          <li>Current status: In Progress (Set for hearing May 23, 2025)</li>
-        </ul>
-      </div>
-    ),
-    keyProvisions: (
-      <div className="report-card" data-id="keyProvisions">
-        <div className="report-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-          </svg>
-        </div>
-        <h2>Key Provisions</h2>
-        <ul className="report-list">
-          <li>Authorizes the Board of Governors to approve territory transfers without the standard petition process</li>
-          <li>Applies to districts in counties divided among three or more CCC districts where majority of residents are in other counties</li>
-          <li>Ensures employee classification and rights are protected during transfers</li>
-          <li>Allows territory transfers to be approved without election</li>
-        </ul>
-      </div>
-    ),
-    fiscalImpact: (
-      <div className="report-card" data-id="fiscalImpact">
-        <div className="report-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <h2>Fiscal Impact</h2>
-        <p>Projected economic impact:</p>
-        <ul className="report-list">
-          <li>Minor state-level Proposition 98 General Fund costs</li>
-          <li>Chancellor's Office one-time costs of $33,000 to $53,000 for petition review</li>
-          <li>Significant potential local costs:</li>
-          <ul className="report-list ml-4">
-            <li>Employment benefit liabilities (long-term)</li>
-            <li>Technology and systems integration (one-time)</li>
-            <li>Facilities and infrastructure adjustments</li>
-          </ul>
-        </ul>
-      </div>
-    ),
-    stakeholderPositions: (
-      <div className="report-card" data-id="stakeholderPositions">
-        <div className="report-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-        </div>
-        <h2>Stakeholder Positions</h2>
-        <div className="stakeholder-section">
-          <h3>Support:</h3>
-          <ul className="report-list">
-            <li>City of West Sacramento</li>
-            <li>City of Woodland</li>
-            <li>County of Yolo</li>
-            <li className="text-gray-600 italic">+6 more organizations</li>
-          </ul>
-        </div>
-        <div className="stakeholder-section">
-          <h3>Opposition:</h3>
-          <ul className="report-list">
-            <li>Cabrillo Community College District</li>
-            <li>CFT - a Union of Educators & Classified Professionals</li>
-            <li>Community College League of California</li>
-          </ul>
-        </div>
-      </div>
-    ),
-    politicalAnalysis: (
-      <div className="report-card" data-id="politicalAnalysis">
-        <div className="report-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-          </svg>
-        </div>
-        <h2>Political Analysis</h2>
-        <ul className="report-list">
-          <li>Strong committee support with 5-2 vote in Senate Education Committee</li>
-          <li>7-0 vote to place on suspense file in Senate Appropriations Committee</li>
-          <li>Primary intent is to streamline transfer of Woodland College from Yuba Community College District to Los Rios Community College District</li>
-          <li>Reduces Yuba CCD to one college (Yuba College)</li>
-          <li>Expands Los Rios CCD from four to five colleges</li>
-        </ul>
-      </div>
-    ),
-    strategicRecommendations: (
-      <div className="report-card" data-id="strategicRecommendations">
-        <div className="report-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-          </svg>
-        </div>
-        <h2>Strategic Recommendations</h2>
-        <ul className="report-list">
-          <li>Focus advocacy on educational access improvements for Yolo County residents</li>
-          <li>Emphasize local community and government support in communications</li>
-          <li>Address concerns about employee protections during transfer process</li>
-          <li>Prepare for potential amendments regarding fiscal impact analysis requirements</li>
-        </ul>
-      </div>
-    )
-  };
+const ReportPreview: React.FC<ReportPreviewProps> = ({ 
+  billNumber
+}) => {
+  // Format bill number for display
+  const formattedBillNumber = billNumber || "AB-123";
+  
+  // Mock data for the preview
+  const currentDate = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
 
   return (
     <div className="report-preview-container">
-      <div className="text-center mb-4">
-        <span className="inline-block px-3 py-1 text-sm font-medium bg-purple-100 text-purple-800 rounded-full">Sample Report Preview</span>
-      </div>
-      
+      {/* Header Section */}
       <div className="report-header">
-        <h1>California SB 226: Community colleges: territory transfers between districts</h1>
-        <p className="text-gray-600">Comprehensive Legislative Analysis</p>
+        <h1>Bill Analysis: {formattedBillNumber}</h1>
+        <p>From Legislative Intelligence to Strategic Action</p>
       </div>
-      
-      <ReactSortable
-        list={cardOrder}
-        setList={setCardOrder}
-        animation={150}
-        handle=".report-card"
-        ghostClass="opacity-50"
-        className="report-grid"
-      >
-        {cardOrder.map((item) => (
-          <React.Fragment key={item.id}>
-            {cards[item.name as keyof typeof cards]}
-          </React.Fragment>
-        ))}
-      </ReactSortable>
+
+      {/* Three Column Grid - Main Sections */}
+      <div className="report-grid-3">
+        {/* Background Section */}
+        <div className="report-card">
+          <div className="report-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <h2>Bill Overview</h2>
+          <ul className="report-list">
+            <li>Introduced on January 15, 2025</li>
+            <li>Author: Assembly Member Johnson</li>
+            <li>Co-sponsors: 5 Assembly Members, 2 Senators</li>
+            <li>Current status: In committee</li>
+            <li>Last action: Referred to Appropriations</li>
+          </ul>
+        </div>
+
+        {/* Key Provisions Section */}
+        <div className="report-card">
+          <div className="report-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <h2>Key Provisions</h2>
+          <ul className="report-list">
+            <li>Establishes new emissions reduction targets</li>
+            <li>Creates $500M annual fund for infrastructure</li>
+            <li>Requires state agencies to develop plans</li>
+            <li>Mandates climate risk disclosure</li>
+            <li>Sets implementation timeline of 24 months</li>
+          </ul>
+        </div>
+
+        {/* Fiscal Impact Section */}
+        <div className="report-card">
+          <div className="report-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h2>Fiscal Impact</h2>
+          <p className="report-subtitle">Estimated total cost: $2.8 billion over 5 years</p>
+          <div className="report-chart">
+            <div className="chart-bar" style={{ height: '60px' }}>
+              <div className="chart-label">2025</div>
+            </div>
+            <div className="chart-bar" style={{ height: '80px' }}>
+              <div className="chart-label">2026</div>
+            </div>
+            <div className="chart-bar" style={{ height: '100px' }}>
+              <div className="chart-label">2027</div>
+            </div>
+            <div className="chart-bar" style={{ height: '120px' }}>
+              <div className="chart-label">2028</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Two Column Grid - Additional Sections */}
+      <div className="report-grid-2">
+        {/* Stakeholder Positions */}
+        <div className="report-card">
+          <div className="report-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h2>Stakeholder Positions</h2>
+          <div className="stakeholder-section">
+            <h3>Support</h3>
+            <ul className="report-list">
+              <li>California Environmental Coalition</li>
+              <li>Clean Energy Business Association</li>
+              <li>Urban Planning Institute</li>
+            </ul>
+          </div>
+          <div className="stakeholder-section">
+            <h3>Opposition</h3>
+            <ul className="report-list">
+              <li>State Manufacturing Alliance</li>
+              <li>Transportation Industry Group</li>
+              <li>Rural Counties Association</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Political Analysis */}
+        <div className="report-card">
+          <div className="report-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h2>Political Analysis</h2>
+          <p>Likelihood of passage: <span className="highlight">Moderate to High</span></p>
+          <ul className="report-list">
+            <li>Strong support from majority party leadership</li>
+            <li>Potential amendments likely in Appropriations</li>
+            <li>Governor has signaled support for core provisions</li>
+            <li>Election year considerations may accelerate timeline</li>
+            <li>Key opposition focused on implementation timeline, not core goals</li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Full Width Sections */}
+      <div className="report-grid-1">
+        {/* Strategic Recommendations */}
+        <div className="report-card">
+          <div className="report-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <h2>Strategic Recommendations</h2>
+          <div className="recommendations-grid">
+            <div className="recommendation">
+              <h3>Short-term Actions</h3>
+              <ul className="report-list">
+                <li>Engage with Appropriations Committee members before vote</li>
+                <li>Prepare impact analysis for affected client operations</li>
+                <li>Develop messaging strategy highlighting economic benefits</li>
+              </ul>
+            </div>
+            <div className="recommendation">
+              <h3>Medium-term Strategy</h3>
+              <ul className="report-list">
+                <li>Position for implementation phase input</li>
+                <li>Build coalition with supportive stakeholders</li>
+                <li>Identify potential amendment opportunities</li>
+              </ul>
+            </div>
+            <div className="recommendation">
+              <h3>Long-term Considerations</h3>
+              <ul className="report-list">
+                <li>Prepare compliance framework for client operations</li>
+                <li>Monitor related legislative initiatives</li>
+                <li>Evaluate opportunities in new funding programs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="report-footer">
+        <p>Report generated on {currentDate} | LegisVoice Intelligence</p>
+        <p>This analysis is based on current information and subject to change as the legislative process evolves.</p>
+      </div>
     </div>
   );
 };
