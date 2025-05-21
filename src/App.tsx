@@ -270,7 +270,7 @@ function App() {
                 <span className="text-blue-600 text-2xl font-bold">2000+</span>
               </div>
               <h3 className="text-xl font-semibold mb-2">Legislative Staff</h3>
-              <p className="text-gray-600">Is your command of legislative details sufficient to stand out amid the noise of competing advocates</p>
+              <p className="text-gray-600">Is your command of legislative details sufficient to stand out amid the noise of competing advocates?</p>
             </Card>
           </div>
         </div>
