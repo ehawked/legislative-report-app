@@ -213,7 +213,7 @@ function App() {
                 <div>Legislation,</div>
                 <div className="gradient-text">Amplified</div>
               </h1>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 max-w-3xl mx-auto mt-[40vh]">
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 max-w-3xl mx-auto mt-[20vh]">
                 <p className="text-xl md:text-2xl text-gray-600 fade-in">
                   We transform complex bills and political landscapes into strategic intelligence, helping you only focus on the legislation that matters
                 </p>
