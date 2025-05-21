@@ -197,6 +197,11 @@ function App() {
     }
   ];
 
+  const combinedCards = [
+    ...trustedCards.map((card) => ({ type: "trusted" as const, ...card })),
+    ...featureCards.map((card) => ({ type: "feature" as const, ...card })),
+  ];
+
   return (
     <div className="min-h-screen flex flex-col text-[#1A1A1A]">
       <div className="progress-bar" style={{ width: `${scrollProgress}%` }}></div>
@@ -311,15 +316,46 @@ function App() {
             className="w-full"
           >
             <CarouselContent>
-              {trustedCards.map((card, index) => (
+              {combinedCards.map((card, index) => (
                 <CarouselItem key={index} className="md:basis-1/3">
-                  <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: `${index * 0.2}s` }}>
-                    <div className={`w-16 h-16 rounded-full bg-${card.color}-100 flex items-center justify-center mx-auto mb-4`}>
-                      <span className={`text-${card.color}-600 text-2xl font-bold`}>{card.number}</span>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
-                    <p className="text-gray-600">{card.description}</p>
-                  </Card>
+                  {card.type === "trusted" ? (
+                    <Card
+                      variant="default"
+                      className="text-center scroll-trigger"
+                      hover={true}
+                      style={{ transitionDelay: `${index * 0.2}s` }}
+                    >
+                      <div
+                        className={`w-16 h-16 rounded-full bg-${card.color}-100 flex items-center justify-center mx-auto mb-4`}
+                      >
+                        <span className={`text-${card.color}-600 text-2xl font-bold`}>{card.number}</span>
+                      </div>
+                      <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
+                      <p className="text-gray-600">{card.description}</p>
+                    </Card>
+                  ) : (
+                    <Card
+                      variant="feature"
+                      className="h-full scroll-trigger"
+                      style={{ transitionDelay: `${index * 0.2}s` }}
+                    >
+                      <div
+                        className={`w-12 h-12 rounded-full bg-${card.color}-500/20 flex items-center justify-center mb-4`}
+                      >
+                        <svg
+                          className={`w-6 h-6 text-${card.color}-500`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          {card.icon}
+                        </svg>
+                      </div>
+                      <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
+                      <p className="text-gray-600">{card.description}</p>
+                    </Card>
+                  )}
                 </CarouselItem>
               ))}
             </CarouselContent>
@@ -338,31 +374,7 @@ function App() {
             Harness powerful legislative insights and comprehensive analysis to position your organization ahead of industry peers
           </p>
           
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            className="w-full"
-          >
-            <CarouselContent>
-              {featureCards.map((card, index) => (
-                <CarouselItem key={index} className="md:basis-1/3">
-                  <Card variant="feature" className="h-full scroll-trigger" style={{ transitionDelay: `${index * 0.2}s` }}>
-                    <div className={`w-12 h-12 rounded-full bg-${card.color}-500/20 flex items-center justify-center mb-4`}>
-                      <svg className={`w-6 h-6 text-${card.color}-500`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        {card.icon}
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
-                    <p className="text-gray-600">{card.description}</p>
-                  </Card>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+          {/* Carousel merged with Trusted section */}
         </div>
       </section>
 
