@@ -56,41 +56,45 @@ const FeaturesCarousel = () => {
               </div>
 
               <div className="grid md:grid-cols-3 gap-8 mt-12">
-                <Card variant="default" className="text-center h-full flex flex-col" hover={true}>
-                  <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-6">
-                    <span className="text-blue-600 text-2xl font-bold">2500+</span>
+                <Card variant="default" className="h-full flex flex-col p-6" hover={true}>
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+                      <span className="text-blue-600 text-2xl font-bold">2500+</span>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-4 text-left">
                     Bills Introduced Annually
                   </h3>
-                  <p className="text-gray-600 flex-grow">
+                  <p className="text-gray-600 flex-grow text-left">
                     Are you wasting resources by paying to track bills that will
                     never impact your priorities?
                   </p>
                 </Card>
 
-                <Card variant="default" className="text-center h-full flex flex-col" hover={true}>
-                  <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-6">
-                    <span className="text-purple-600 text-2xl font-bold">
-                      $540M
-                    </span>
+                <Card variant="default" className="h-full flex flex-col p-6" hover={true}>
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center">
+                      <span className="text-purple-600 text-2xl font-bold">$540M</span>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-4 text-left">
                     Spent to Influence State Officials and Legislation
                   </h3>
-                  <p className="text-gray-600 flex-grow">
+                  <p className="text-gray-600 flex-grow text-left">
                     Does your data tell you how dollars are moving policy?
                   </p>
                 </Card>
 
-                <Card variant="default" className="text-center h-full flex flex-col" hover={true}>
-                  <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-6">
-                    <span className="text-blue-600 text-2xl font-bold">2000+</span>
+                <Card variant="default" className="h-full flex flex-col p-6" hover={true}>
+                  <div className="flex items-center mb-6">
+                    <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center">
+                      <span className="text-blue-600 text-2xl font-bold">2000+</span>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-4 text-left">
                     Legislative Staff
                   </h3>
-                  <p className="text-gray-600 flex-grow">
+                  <p className="text-gray-600 flex-grow text-left">
                     Is your command of legislative details sufficient to stand out
                     amid the noise of competing advocates?
                   </p>
@@ -114,45 +118,53 @@ const FeaturesCarousel = () => {
               </div>
 
               <div className="grid md:grid-cols-3 gap-8 mt-12">
-                <Card variant="feature" className="h-full flex flex-col">
-                  <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-6">
-                    <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
+                <Card variant="feature" className="h-full flex flex-col p-6">
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center">
+                      <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">Focused Data</h3>
-                  <p className="text-gray-600 flex-grow">
+                  <h3 className="text-xl font-semibold mb-4 text-left">
+                    Focused Data
+                  </h3>
+                  <p className="text-gray-600 flex-grow text-left">
                     Consolidate public data and expert analysis to provide a
                     comprehensive view of the legislative landscape
                   </p>
                 </Card>
 
-                <Card variant="feature" className="h-full flex flex-col">
-                  <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-6">
-                    <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+                <Card variant="feature" className="h-full flex flex-col p-6">
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+                      <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-4 text-left">
                     Instant Analysis
                   </h3>
-                  <p className="text-gray-600 flex-grow">
+                  <p className="text-gray-600 flex-grow text-left">
                     Instantly produce polished, detailed reports designed for
                     seamless distribution to members, stakeholders, and public
                     audiences
                   </p>
                 </Card>
 
-                <Card variant="feature" className="h-full flex flex-col">
-                  <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-6">
-                    <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                    </svg>
+                <Card variant="feature" className="h-full flex flex-col p-6">
+                  <div className="flex items-center mb-6">
+                    <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+                      <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                      </svg>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">
+                  <h3 className="text-xl font-semibold mb-4 text-left">
                     Customizable Reports
                   </h3>
-                  <p className="text-gray-600 flex-grow">
+                  <p className="text-gray-600 flex-grow text-left">
                     Tailor reports to your specific needs, policy area and
                     organizational requirements
                   </p>
