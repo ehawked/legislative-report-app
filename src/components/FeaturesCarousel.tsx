@@ -11,7 +11,7 @@ const FeaturesCarousel = () => {
       emblaApi.on('select', () => {
         setSelectedIndex(emblaApi.selectedScrollSnap());
       });
-
+      
       return () => {
         emblaApi.off('select');
       };
@@ -41,21 +41,21 @@ const FeaturesCarousel = () => {
 
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
+          {/* First Slide */}
           <div className="flex-[0_0_100%] min-w-0">
             <div className="max-w-7xl mx-auto px-4 py-20">
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-5">
                 Built by{' '}
                 <span className="gradient-text">Government Relations Experts</span>
               </h2>
-              <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+              <p className="text-base text-gray-600 text-center mb-12 max-w-[80%] mx-auto leading-relaxed line-clamp-2">
                 Go beyond tracking to deliver strategic data selected by those who
                 know what drives results
               </p>
 
               <div className="grid md:grid-cols-3 gap-8">
                 <Card variant="default" className="text-center" hover={true}>
-                  <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center
-                    justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
                     <span className="text-blue-600 text-2xl font-bold">2500+</span>
                   </div>
                   <h3 className="text-xl font-semibold mb-2">
@@ -68,8 +68,7 @@ const FeaturesCarousel = () => {
                 </Card>
 
                 <Card variant="default" className="text-center" hover={true}>
-                  <div className="w-16 h-16 rounded-full bg-purple-100 flex
-                    items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
                     <span className="text-purple-600 text-2xl font-bold">
                       $540M
                     </span>
@@ -83,8 +82,7 @@ const FeaturesCarousel = () => {
                 </Card>
 
                 <Card variant="default" className="text-center" hover={true}>
-                  <div className="w-16 h-16 rounded-full bg-blue-100 flex
-                    items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
                     <span className="text-blue-600 text-2xl font-bold">2000+</span>
                   </div>
                   <h3 className="text-xl font-semibold mb-2">
@@ -99,13 +97,14 @@ const FeaturesCarousel = () => {
             </div>
           </div>
 
+          {/* Second Slide */}
           <div className="flex-[0_0_100%] min-w-0">
             <div className="max-w-7xl mx-auto px-4 py-20">
-              <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-5">
                 <span className="gradient-text">Unparalleled</span>{' '}
                 Legislative Intelligence
               </h2>
-              <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+              <p className="text-base text-gray-600 text-center mb-12 max-w-[80%] mx-auto leading-relaxed line-clamp-2">
                 Harness powerful legislative insights and comprehensive analysis to
                 position your organization ahead of industry peers
               </p>
@@ -113,16 +112,9 @@ const FeaturesCarousel = () => {
               <div className="horizontal-scroll-container">
                 <div className="horizontal-scroll-item">
                   <Card variant="feature" className="h-full">
-                    <div className="w-12 h-12 rounded-full bg-blue-500/20 flex
-                      items-center justify-center mb-4">
-                      <svg className="w-6 h-6 text-blue-500" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                          strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955
-                          11.955 0 0112 2.944a11.955 11.955 0 01-8.618
-                          3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9
-                          11.622 5.176-1.332 9-6.03 9-11.622
-                          0-1.042-.133-2.052-.382-3.016z" />
+                    <div className="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                       </svg>
                     </div>
                     <h3 className="text-xl font-semibold mb-2">Focused Data</h3>
@@ -135,12 +127,9 @@ const FeaturesCarousel = () => {
 
                 <div className="horizontal-scroll-item">
                   <Card variant="feature" className="h-full">
-                    <div className="w-12 h-12 rounded-full bg-purple-500/20 flex
-                      items-center justify-center mb-4">
-                      <svg className="w-6 h-6 text-purple-500" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                          strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
                     </div>
                     <h3 className="text-xl font-semibold mb-2">
@@ -156,14 +145,9 @@ const FeaturesCarousel = () => {
 
                 <div className="horizontal-scroll-item">
                   <Card variant="feature" className="h-full">
-                    <div className="w-12 h-12 rounded-full bg-purple-500/20 flex
-                      items-center justify-center mb-4">
-                      <svg className="w-6 h-6 text-purple-500" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                          strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0
-                          110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6
-                          6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                    <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center mb-4">
+                      <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                       </svg>
                     </div>
                     <h3 className="text-xl font-semibold mb-2">
