@@ -47,6 +47,10 @@ const FeaturesCarousel = () => {
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
                 Built by <span className="gradient-text">Government Relations Experts</span>
               </h2>
+                            <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                Go beyond tracking to deliver strategic data selected by those who know what drives results
+              </p>
+            
               
               <div className="grid md:grid-cols-3 gap-8">
                 <Card variant="default" className="text-center" hover={true}>
