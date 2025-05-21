@@ -245,6 +245,37 @@ function App() {
 
       <FeaturesCarousel />
 
+      <section className="py-20 px-4 sm:px-6 lg:px-8" ref={howItWorksRef}>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 scroll-trigger">
+            How It <span className="gradient-text">Works</span>
+          </h2>
+          <p className="text-gray-600 text-center mb-16 max-w-2xl mx-auto scroll-trigger" style={{ transitionDelay: '0.2s' }}>
+            Three simple steps to transform complex legislation into actionable intelligence
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.3s' }}>
+              <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+              <h3 className="text-xl font-semibold mb-2">Select Bill</h3>
+              <p className="text-gray-600">Enter any California legislative bill number (e.g., AB-123, SB-456)</p>
+            </Card>
+            
+            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.4s' }}>
+              <div className="w-12 h-12 rounded-full bg-purple-500 text-white flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+              <h3 className="text-xl font-semibold mb-2">Generate Report</h3>
+              <p className="text-gray-600">Our system analyzes the bill and creates a comprehensive report</p>
+            </Card>
+            
+            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.5s' }}>
+              <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+              <h3 className="text-xl font-semibold mb-2">Download PDF</h3>
+              <p className="text-gray-600">Get your professional report instantly, ready to share or print</p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 px-4 sm:px-6 lg:px-8" ref={generateReportRef}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 scroll-trigger">
