@@ -5,15 +5,6 @@ import Card from './Card';
 const FeaturesCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [autoplayInterval, setAutoplayInterval] = React.useState<NodeJS.Timeout | null>(null);
-
-  const startAutoplay = React.useCallback(() => {
-    if (autoplayInterval) clearInterval(autoplayInterval);
-    const interval = setInterval(() => {
-      if (emblaApi) emblaApi.scrollNext();
-    }, 10000);
-    setAutoplayInterval(interval);
-  }, [emblaApi, autoplayInterval]);
 
   React.useEffect(() => {
     if (emblaApi) {
@@ -21,19 +12,15 @@ const FeaturesCarousel = () => {
         setSelectedIndex(emblaApi.selectedScrollSnap());
       });
       
-      startAutoplay();
-      
       return () => {
-        if (autoplayInterval) clearInterval(autoplayInterval);
         emblaApi.off('select');
       };
     }
-  }, [emblaApi, autoplayInterval, startAutoplay]);
+  }, [emblaApi]);
 
   const handleSlideClick = (index: number) => {
     if (emblaApi) {
       emblaApi.scrollTo(index);
-      startAutoplay(); // Reset timer when manually navigating
     }
   };
 
