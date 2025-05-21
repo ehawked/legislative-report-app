@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sortable } from 'react-sortablejs';
+import { ReactSortable } from 'react-sortablejs';
 
 interface ReportPreviewProps {
   billNumber: string;
@@ -146,14 +146,12 @@ const ReportPreview: React.FC<ReportPreviewProps> = ({ billNumber }) => {
         <p className="text-gray-600">Comprehensive Legislative Analysis</p>
       </div>
       
-      <Sortable
-        tag="div"
-        options={{
-          animation: 150,
-          handle: '.report-card',
-          ghostClass: 'opacity-50'
-        }}
-        onChange={(order) => handleCardOrderChange(order)}
+      <ReactSortable
+        list={cardOrder}
+        setList={setCardOrder}
+        animation={150}
+        handle=".report-card"
+        ghostClass="opacity-50"
       >
         <div className="report-grid">
           {cardOrder.map((cardKey) => (
@@ -162,7 +160,7 @@ const ReportPreview: React.FC<ReportPreviewProps> = ({ billNumber }) => {
             </React.Fragment>
           ))}
         </div>
-      </Sortable>
+      </ReactSortable>
     </div>
   );
 };
