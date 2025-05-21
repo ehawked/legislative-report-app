@@ -5,19 +5,20 @@ interface ReportPreviewProps {
   billNumber: string;
 }
 
-const ReportPreview: React.FC<ReportPreviewProps> = ({ billNumber }) => {
-  const [cardOrder, setCardOrder] = useState([
-    'billOverview',
-    'keyProvisions',
-    'fiscalImpact',
-    'stakeholderPositions',
-    'politicalAnalysis',
-    'strategicRecommendations'
-  ]);
+interface CardItem {
+  id: string;
+  name: string;
+}
 
-  const handleCardOrderChange = (newOrder: string[]) => {
-    setCardOrder(newOrder);
-  };
+const ReportPreview: React.FC<ReportPreviewProps> = ({ billNumber }) => {
+  const [cardOrder, setCardOrder] = useState<CardItem[]>([
+    { id: 'billOverview', name: 'billOverview' },
+    { id: 'keyProvisions', name: 'keyProvisions' },
+    { id: 'fiscalImpact', name: 'fiscalImpact' },
+    { id: 'stakeholderPositions', name: 'stakeholderPositions' },
+    { id: 'politicalAnalysis', name: 'politicalAnalysis' },
+    { id: 'strategicRecommendations', name: 'strategicRecommendations' }
+  ]);
 
   const cards = {
     billOverview: (
@@ -152,14 +153,13 @@ const ReportPreview: React.FC<ReportPreviewProps> = ({ billNumber }) => {
         animation={150}
         handle=".report-card"
         ghostClass="opacity-50"
+        className="report-grid"
       >
-        <div className="report-grid">
-          {cardOrder.map((cardKey) => (
-            <React.Fragment key={cardKey}>
-              {cards[cardKey as keyof typeof cards]}
-            </React.Fragment>
-          ))}
-        </div>
+        {cardOrder.map((item) => (
+          <React.Fragment key={item.id}>
+            {cards[item.name as keyof typeof cards]}
+          </React.Fragment>
+        ))}
       </ReactSortable>
     </div>
   );
