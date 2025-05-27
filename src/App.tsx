@@ -250,6 +250,19 @@ function App() {
 
       <section className="sample-preview-section py-20">
         <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-center gap-2 mb-8">
+            {[0, 1].map((idx) => (
+              <button
+                key={idx}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  idx === selectedIndex ? 'bg-purple-600 w-4' : 'bg-gray-300'
+                }`}
+                onClick={() => handleSlideClick(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 sample-preview-heading scroll-trigger">
             <span className="gradient-text">Multiple</span> Legislative Reports
           </h2>
@@ -271,19 +284,6 @@ function App() {
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div className="flex justify-center gap-2 mt-6">
-            {[0, 1].map((idx) => (
-              <button
-                key={idx}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === selectedIndex ? 'bg-purple-600 w-4' : 'bg-gray-300'
-                }`}
-                onClick={() => handleSlideClick(idx)}
-                aria-label={`Go to slide ${idx + 1}`}
-              />
-            ))}
           </div>
         </div>
       </section>
