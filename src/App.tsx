@@ -82,7 +82,7 @@ function App() {
     
     const billRegex = /^(AB|SB|HR)\d+$/i;
     if (!billRegex.test(billNumber)) {
-      setError('Please enter a valid bill number format (e.g., AB123, SB456)');
+      setError('Please enter a valid bill number format (e.g., AB 123, SB 456)');
       return;
     }
     
@@ -308,7 +308,7 @@ function App() {
                 <Card variant="default" className="text-left p-6" hover={true}>
                   <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mb-4 text-xl font-bold">1</div>
                   <h3 className="text-xl font-semibold mb-2">Select Bill</h3>
-                  <p className="text-gray-600">Enter any California legislative bill number (e.g., AB123, SB456)</p>
+                  <p className="text-gray-600">Enter any California legislative bill number (e.g., AB 123, SB 456)</p>
                 </Card>
                 
                 <Card variant="default" className="text-left p-6" hover={true}>
