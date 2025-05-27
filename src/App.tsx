@@ -309,49 +309,44 @@ function App() {
 
       <FeaturesCarousel />
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8" ref={howItWorksRef}>
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 scroll-trigger">
-            How It <span className="gradient-text">Works</span>
-          </h2>
-          <p className="text-gray-600 text-center mb-16 max-w-2xl mx-auto scroll-trigger" style={{ transitionDelay: '0.2s' }}>
-            Three simple steps to transform complex legislation into actionable intelligence
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.3s' }}>
-              <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
-              <h3 className="text-xl font-semibold mb-2">Select Bill</h3>
-              <p className="text-gray-600">Enter any California legislative bill number (e.g., AB-123, SB-456)</p>
-            </Card>
-            
-            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.4s' }}>
-              <div className="w-12 h-12 rounded-full bg-purple-500 text-white flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
-              <h3 className="text-xl font-semibold mb-2">Generate Report</h3>
-              <p className="text-gray-600">Our system analyzes the bill and creates a comprehensive report</p>
-            </Card>
-            
-            <Card variant="default" className="text-center scroll-trigger" hover={true} style={{ transitionDelay: '0.5s' }}>
-              <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
-              <h3 className="text-xl font-semibold mb-2">Download PDF</h3>
-              <p className="text-gray-600">Get your professional report instantly, ready to share or print</p>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50" ref={generateReportRef}>
+      <div className="relative bg-gradient-to-b from-white to-gray-50">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-500 to-transparent opacity-30"></div>
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 scroll-trigger">
-            Generate Your <span className="gradient-text">Report</span>
-          </h2>
-          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto scroll-trigger" style={{ transitionDelay: '0.2s' }}>
-            Enter a California legislative bill number to get started
-          </p>
-          
-          <div className="flex justify-center">
-            <div className="scroll-trigger w-full max-w-lg" style={{ transitionDelay: '0.4s' }}>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            {/* How It Works Section */}
+            <div ref={howItWorksRef}>
+              <h2 className="text-4xl font-bold mb-8">
+                How It <span className="gradient-text">Works</span>
+              </h2>
+              
+              <div className="grid gap-8">
+                <Card variant="default" className="text-left p-6" hover={true}>
+                  <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mb-4 text-xl font-bold">1</div>
+                  <h3 className="text-xl font-semibold mb-2">Select Bill</h3>
+                  <p className="text-gray-600">Enter any California legislative bill number (e.g., AB-123, SB-456)</p>
+                </Card>
+                
+                <Card variant="default" className="text-left p-6" hover={true}>
+                  <div className="w-12 h-12 rounded-full bg-purple-500 text-white flex items-center justify-center mb-4 text-xl font-bold">2</div>
+                  <h3 className="text-xl font-semibold mb-2">Generate Report</h3>
+                  <p className="text-gray-600">Our system analyzes the bill and creates a comprehensive report</p>
+                </Card>
+                
+                <Card variant="default" className="text-left p-6" hover={true}>
+                  <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mb-4 text-xl font-bold">3</div>
+                  <h3 className="text-xl font-semibold mb-2">Download PDF</h3>
+                  <p className="text-gray-600">Get your professional report instantly, ready to share or print</p>
+                </Card>
+              </div>
+            </div>
+
+            {/* Generate Report Section */}
+            <div ref={generateReportRef}>
+              <h2 className="text-4xl font-bold mb-8">
+                Generate Your <span className="gradient-text">Report</span>
+              </h2>
+              
               <WebhookForm
                 billNumber={billNumber}
                 setBillNumber={setBillNumber}
@@ -371,14 +366,8 @@ function App() {
               />
             </div>
           </div>
-          
-          {showPreview && (
-            <div className="mt-16 scroll-trigger" style={{ transitionDelay: '0.2s' }}>
-              <SampleReportPreview />
-            </div>
-          )}
         </div>
-      </section>
+      </div>
 
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
