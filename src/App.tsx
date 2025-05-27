@@ -1,14 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import WebhookConfig from './components/WebhookConfig';
-import ReportPreview from './components/ReportPreview';
-import SampleReportPreview from './components/SampleReportPreview';
 import WebhookForm from './components/WebhookForm';
 import Button from './components/Button';
 import Card from './components/Card';
 import FeaturesCarousel from './components/FeaturesCarousel';
+import SampleReportPreview from './components/SampleReportPreview';
 import './components/ReportPreview.css';
 import { generateReport, downloadPdf, type ReportRequest } from './lib/webhookService';
+import useEmblaCarousel from 'embla-carousel-react';
 
 function App() {
   const [webhookUrl, setWebhookUrl] = useState<string>(() => {
@@ -31,6 +30,8 @@ function App() {
   const trustedRef = React.useRef<HTMLDivElement>(null);
   
   const [offsetY, setOffsetY] = useState(0);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   useEffect(() => {
     if (webhookUrl) {
@@ -62,6 +63,18 @@ function App() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  React.useEffect(() => {
+    if (emblaApi) {
+      emblaApi.on('select', () => {
+        setSelectedIndex(emblaApi.selectedScrollSnap());
+      });
+      
+      return () => {
+        emblaApi.off('select');
+      };
+    }
+  }, [emblaApi]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -141,6 +154,12 @@ function App() {
   
   const scrollTo = (ref: React.RefObject<HTMLDivElement>) => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSlideClick = (index: number) => {
+    if (emblaApi) {
+      emblaApi.scrollTo(index);
+    }
   };
 
   return (
@@ -237,8 +256,53 @@ function App() {
             Our reports provide comprehensive analysis and actionable insights
           </p>
           
-          <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
-            <SampleReportPreview />
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              <div className="flex-[0_0_100%] min-w-0">
+                <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
+                  <SampleReportPreview />
+                </div>
+              </div>
+              
+              <div className="flex-[0_0_100%] min-w-0">
+                <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
+                  <Card variant="default" className="p-8">
+                    <h3 className="text-2xl font-bold mb-6">Detailed Legislative Reports</h3>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <Card variant="default" className="p-6">
+                        <h4 className="text-lg font-semibold mb-4">Stakeholder Analysis</h4>
+                        <p className="text-gray-600">Placeholder for detailed stakeholder analysis content</p>
+                      </Card>
+                      <Card variant="default" className="p-6">
+                        <h4 className="text-lg font-semibold mb-4">Impact Assessment</h4>
+                        <p className="text-gray-600">Placeholder for impact assessment content</p>
+                      </Card>
+                      <Card variant="default" className="p-6">
+                        <h4 className="text-lg font-semibold mb-4">Strategic Recommendations</h4>
+                        <p className="text-gray-600">Placeholder for strategic recommendations content</p>
+                      </Card>
+                      <Card variant="default" className="p-6">
+                        <h4 className="text-lg font-semibold mb-4">Implementation Timeline</h4>
+                        <p className="text-gray-600">Placeholder for implementation timeline content</p>
+                      </Card>
+                    </div>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex justify-center gap-2 mt-6">
+            {[0, 1].map((idx) => (
+              <button
+                key={idx}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  idx === selectedIndex ? 'bg-purple-600 w-4' : 'bg-gray-300'
+                }`}
+                onClick={() => handleSlideClick(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
