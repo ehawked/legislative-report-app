@@ -276,7 +276,7 @@ function App() {
         </div>
       </section>
 
-      <section className="py-20 px-4 sm:px-6 lg:px-8" ref={generateReportRef}>
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50" ref={generateReportRef}>
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 scroll-trigger">
             Generate Your <span className="gradient-text">Report</span>
@@ -285,15 +285,8 @@ function App() {
             Enter a California legislative bill number to get started
           </p>
           
-          <div className="grid md:grid-cols-2 gap-8 items-start">
-            <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
-              <WebhookConfig 
-                webhookUrl={webhookUrl} 
-                setWebhookUrl={setWebhookUrl} 
-              />
-            </div>
-            
-            <div className="scroll-trigger" style={{ transitionDelay: '0.4s' }}>
+          <div className="flex justify-center">
+            <div className="scroll-trigger w-full max-w-lg" style={{ transitionDelay: '0.4s' }}>
               <WebhookForm
                 billNumber={billNumber}
                 setBillNumber={setBillNumber}
