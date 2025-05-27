@@ -3,7 +3,6 @@ import Button from './Button';
 import Card from './Card';
 import Input from './Input';
 
-
 interface WebhookFormProps {
   billNumber: string;
   setBillNumber: (value: string) => void;
@@ -34,7 +33,6 @@ const WebhookForm: React.FC<WebhookFormProps> = ({
   isLoading,
   isSuccess,
   error,
-  // pdfUrl used in download functionality
   handleSubmit,
   handleDownloadPdf,
   resetForm
@@ -49,7 +47,7 @@ const WebhookForm: React.FC<WebhookFormProps> = ({
             <Input
               id="billNumber"
               label="Bill Number"
-              placeholder="e.g., AB-123 or SB-456"
+              placeholder="e.g., AB123 or SB456"
               value={billNumber}
               onChange={(e) => setBillNumber(e.target.value)}
               required

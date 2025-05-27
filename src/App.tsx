@@ -80,9 +80,9 @@ function App() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const billRegex = /^(AB|SB)-\d+$/i;
+    const billRegex = /^(AB|SB|HR)\d+$/i;
     if (!billRegex.test(billNumber)) {
-      setError('Please enter a valid bill number format (e.g., AB-123, SB-456)');
+      setError('Please enter a valid bill number format (e.g., AB123, SB456)');
       return;
     }
     
@@ -235,7 +235,7 @@ function App() {
               </h1>
               <div className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 max-w-3xl mx-auto mt-[15vh]">
                 <p className="text-xl md:text-2xl text-gray-600 fade-in">
-                  We transform complex bills and political landscapes into strategic intelligence, helping you only focus on the legislation that matters
+                  We transform complex bills into strategic intelligence, helping you only focus on the legislation that matters
                 </p>
               </div>
             </div>
@@ -308,7 +308,7 @@ function App() {
                 <Card variant="default" className="text-left p-6" hover={true}>
                   <div className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center mb-4 text-xl font-bold">1</div>
                   <h3 className="text-xl font-semibold mb-2">Select Bill</h3>
-                  <p className="text-gray-600">Enter any California legislative bill number (e.g., AB-123, SB-456)</p>
+                  <p className="text-gray-600">Enter any California legislative bill number (e.g., AB123, SB456)</p>
                 </Card>
                 
                 <Card variant="default" className="text-left p-6" hover={true}>
