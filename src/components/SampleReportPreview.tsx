@@ -4,7 +4,7 @@ const SampleReportPreview: React.FC = () => {
   return (
     <div className="report-preview-container mx-auto mb-8">
       <div className="text-center mb-4">
-        <span className="inline-block px-3 py-1 text-sm font-medium bg-purple-100 text-purple-800 rounded-full">Sample Report Preview</span>
+        <span className="inline-block px-3 py-1 text-sm font-medium bg-purple-100 text-purple-800 rounded-full">Report Overview</span>
       </div>
       
       <div className="report-header">
