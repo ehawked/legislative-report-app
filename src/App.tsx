@@ -257,15 +257,18 @@ function App() {
             Our reports provide comprehensive analysis and actionable insights
           </p>
           
-          <div className="flex justify-center gap-2 mb-4">
+          <div className="flex justify-center gap-4 mb-6">
             {[0, 1].map((idx) => (
               <button
                 key={idx}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === selectedIndex ? 'bg-purple-600 w-4' : 'bg-gray-300'
+                className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
+                  idx === selectedIndex 
+                    ? 'bg-purple-600 w-8 shadow-lg hover:bg-purple-700' 
+                    : 'bg-gray-300 hover:bg-gray-400'
                 }`}
                 onClick={() => handleSlideClick(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
+                aria-current={idx === selectedIndex ? 'true' : 'false'}
               />
             ))}
           </div>
