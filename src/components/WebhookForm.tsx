@@ -45,7 +45,7 @@ const WebhookForm: React.FC<WebhookFormProps> = ({
           <>
             <Input
               id="billNumber"
-              label={<>Bill Number <span className="text-red-500">*</span></>}
+              label={<>Bill Number <span className="text-red-500"></span></>}
               placeholder="e.g., AB 123 or SB 456"
               value={billNumber}
               onChange={(e) => setBillNumber(e.target.value)}
@@ -56,7 +56,7 @@ const WebhookForm: React.FC<WebhookFormProps> = ({
             
             <Input
               id="email"
-              label={<>Email <span className="text-red-500">*</span></>}
+              label={<>Email <span className="text-red-500"></span></>}
               type="email"
               placeholder="you@example.com"
               value={email}
