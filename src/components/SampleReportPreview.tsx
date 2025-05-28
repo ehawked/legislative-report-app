@@ -11,6 +11,34 @@ const SampleReportPreview: React.FC = () => {
         <h1>California SB 226: Community colleges: territory transfers between districts</h1>
         <p className="text-gray-600">Comprehensive Legislative Analysis</p>
       </div>
+
+      {/* New Horizontal Card */}
+      <div className="report-card w-full mb-6">
+        <div className="flex items-start gap-6">
+          <div className="report-icon shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div className="flex-1">
+            <h2 className="mb-4">Executive Summary</h2>
+            <div className="grid grid-cols-3 gap-6">
+              <div>
+                <h3 className="text-sm font-semibold text-gray-600 mb-2">Current Status</h3>
+                <p className="text-base">In committee review with strong bipartisan support. Expected floor vote by June 2025.</p>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-gray-600 mb-2">Primary Impact</h3>
+                <p className="text-base">Streamlines territory transfer process for community college districts, affecting 15% of California's community colleges.</p>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-gray-600 mb-2">Key Stakeholders</h3>
+                <p className="text-base">Community college districts, faculty unions, student organizations, and local governance bodies.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       
       <div className="report-grid">
         <div className="report-card">
