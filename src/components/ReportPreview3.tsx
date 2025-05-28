@@ -24,7 +24,7 @@ const ArgumentSide: React.FC<ArgumentSideProps> = ({ title, points, stakeholders
         <h3 className="text-lg font-bold">{title}</h3>
       </div>
       
-      <div className={`border-t ${borderColor} pt-4 mb-6`}>
+      <div className={`border-t ${borderColor} pt-4 mb-6 min-h-[240px]`}>
         <h4 className="text-base font-bold mb-3">Key Arguments</h4>
         <ul className="space-y-3">
           {points.map((point, index) => (
@@ -36,7 +36,7 @@ const ArgumentSide: React.FC<ArgumentSideProps> = ({ title, points, stakeholders
         </ul>
       </div>
       
-      <div className={`border-t ${borderColor} pt-4 mb-6`}>
+      <div className={`border-t ${borderColor} pt-4 mb-6 min-h-[160px]`}>
         <h4 className="text-base font-bold mb-3">Key Stakeholders</h4>
         <ul className="space-y-2">
           {stakeholders.map((stakeholder, index) => (
@@ -48,7 +48,7 @@ const ArgumentSide: React.FC<ArgumentSideProps> = ({ title, points, stakeholders
         </ul>
       </div>
       
-      <div className={`border-t ${borderColor} pt-4`}>
+      <div className={`border-t ${borderColor} pt-4 min-h-[100px]`}>
         <h4 className="text-base font-bold mb-3">Projected Impact</h4>
         <p className="text-base">{impact}</p>
       </div>
