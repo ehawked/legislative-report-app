@@ -22,7 +22,7 @@ const useSideStyles = (sentiment: 'positive' | 'negative') => {
 };
 
 const ReportPreview3: React.FC = () => {
-  // --- Data for both sides ---
+  // — Data for both sides —
   const support: ArgumentSideData = {
     title: 'Support Position',
     points: [
@@ -65,13 +65,13 @@ const ReportPreview3: React.FC = () => {
     sentiment: 'negative',
   };
 
-  // --- Flattened summaryRows for the top grid ---
+  // — Flattened summary rows for the top grid —
   const summaryRows = [
     ...support.stakeholders.map((org) => ({ org, pos: 'Support' as const })),
     ...oppose.stakeholders.map((org) => ({ org, pos: 'Oppose' as const })),
   ];
 
-  // --- Section definitions for the detail grid ---
+  // — Section definitions for the detail grid —
   const sections = [
     {
       key: 'args',
@@ -119,15 +119,13 @@ const ReportPreview3: React.FC = () => {
   ];
 
   return (
-    <div className="report-preview-container">
-      {/* Title */}
-      <div className="text-center mb-6">
-        <span className="inline-block px-4 py-1.5 text-sm font-medium bg-purple-100 text-purple-800 rounded-full">
-          Arguments Analysis
-        </span>
-      </div>
+    <div className="report-preview-container px-4">
+      {/* ——— Main title, centered ——— */}
+      <h1 className="text-3xl font-bold text-center my-8">
+        AB 1122: Dual Enrollment Programs
+      </h1>
 
-      {/* 3-column summary grid */}
+      {/* ——— 3-column summary grid ——— */}
       <div className="grid grid-cols-3 gap-4 mb-8">
         {summaryRows.map(({ org, pos }, idx) => (
           <div
@@ -148,26 +146,15 @@ const ReportPreview3: React.FC = () => {
         ))}
       </div>
 
-      {/* Detailed 2×4 grid inside the Card */}
+      {/* ——— Detailed 2×4 grid inside a Card ——— */}
       <Card variant="default" className="overflow-hidden">
-        {/* Card header */}
-        <div className="p-8 bg-white border-b border-gray-200">
-          <h2 className="text-2xl font-bold mb-3">
-            AB 1122: Dual Enrollment Programs
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Analysis of supporting and opposing positions
-          </p>
-        </div>
-
-        {/* 2 columns × 4 rows (header + 3 sections) */}
         <div className="grid grid-cols-2 divide-x divide-gray-200">
-          {/* Row 1: headers for each side */}
+          {/* Row 1: side headers */}
           {[support, oppose].map((side) => {
             const { bg, text, Icon } = useSideStyles(side.sentiment);
             return (
               <div key={side.sentiment} className={`p-8 ${bg}`}>
-                <div className={`flex items-center gap-3 ${text}`}>
+                <div className={`flex items-center justify-center gap-3 ${text}`}>
                   <Icon className="w-6 h-6" strokeWidth={2.5} />
                   <h3 className="text-xl font-bold">{side.title}</h3>
                 </div>
@@ -175,7 +162,7 @@ const ReportPreview3: React.FC = () => {
             );
           })}
 
-          {/* Rows 2–4: each section duplicated for support & oppose */}
+          {/* Rows 2–4: each section for both sides */}
           {sections.map((sec) =>
             [support, oppose].map((side) => (
               <div
