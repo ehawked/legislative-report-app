@@ -10,7 +10,6 @@ interface ArgumentSideData {
   sentiment: 'positive' | 'negative';
 }
 
-// helper to pick the colors & icon
 const useSideStyles = (sentiment: 'positive' | 'negative') => {
   const isPos = sentiment === 'positive';
   return {
@@ -34,9 +33,12 @@ const ReportPreview3: React.FC = () => {
     ],
     stakeholders: [
       'California Chamber of Commerce',
-      'State PTA',
+      'California State PTA',
       'Campaign for College Opportunity',
-      'Community College League',
+      'Education Trust – West',
+      'Career Ladders Project',
+      'California High School District Coalition',
+      'Alameda County Office of Education',
     ],
     impact:
       'Projected to increase dual enrollment participation by 35% within first two years of implementation',
@@ -53,7 +55,7 @@ const ReportPreview3: React.FC = () => {
       'Resource allocation issues for smaller districts',
     ],
     stakeholders: [
-      'CFT - Union of Educators',
+      'CFT – California Federation of Teachers',
       'Some Rural District Administrators',
       'Faculty Association Representatives',
     ],
@@ -61,6 +63,12 @@ const ReportPreview3: React.FC = () => {
       'Estimates additional costs of $2.8M annually for program administration and support',
     sentiment: 'negative',
   };
+
+  // Build summary rows for the table
+  const summaryRows = [
+    ...support.stakeholders.map(org => ({ org, pos: 'Support' })),
+    ...oppose.stakeholders.map(org => ({ org, pos: 'Oppose' })),
+  ];
 
   const sections = [
     {
@@ -88,10 +96,7 @@ const ReportPreview3: React.FC = () => {
       render: (d: ArgumentSideData) => (
         <ul className="space-y-3">
           {d.stakeholders.map((st, i) => (
-            <li
-              key={i}
-              className="text-base flex items-center gap-3"
-            >
+            <li key={i} className="text-base flex items-center gap-3">
               <span
                 className={`w-2 h-2 rounded-full ${useSideStyles(
                   d.sentiment
@@ -121,6 +126,42 @@ const ReportPreview3: React.FC = () => {
         </span>
       </div>
 
+      {/* ——— New Supporters/Opposers Table ——— */}
+      <div className="overflow-x-auto mb-8">
+        <table className="min-w-full bg-white divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Organization
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Position
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {summaryRows.map(({ org, pos }, i) => (
+              <tr key={i}>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                  {org}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <span
+                    className={`inline-block px-2 py-1 rounded-full ${
+                      pos === 'Support'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                    }`}
+                  >
+                    {pos}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       <Card variant="default" className="overflow-hidden">
         <div className="p-8 bg-white border-b border-gray-200">
           <h2 className="text-2xl font-bold mb-3">
@@ -133,7 +174,7 @@ const ReportPreview3: React.FC = () => {
 
         <div className="grid grid-cols-2 divide-x divide-gray-200">
           {/* HEADER ROW */}
-          {[support, oppose].map((side) => {
+          {[support, oppose].map(side => {
             const { bg, text, Icon } = useSideStyles(side.sentiment);
             return (
               <div key={side.sentiment} className={`p-8 ${bg}`}>
@@ -146,8 +187,8 @@ const ReportPreview3: React.FC = () => {
           })}
 
           {/* DYNAMIC SECTION ROWS */}
-          {sections.map((sec) =>
-            [support, oppose].map((side) => (
+          {sections.map(sec =>
+            [support, oppose].map(side => (
               <div
                 key={side.sentiment + sec.key}
                 className={`p-8 border-t border-gray-200 pt-6 ${sec.minH}`}
