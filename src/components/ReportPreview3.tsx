@@ -127,8 +127,8 @@ const ReportPreview3: React.FC = () => {
         </span>
       </div>
 
-      {/* 4-column summary grid */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      {/* 3-column summary grid */}
+      <div className="grid grid-cols-3 gap-4 mb-8">
         {summaryRows.map(({ org, pos }, idx) => (
           <div
             key={idx}
