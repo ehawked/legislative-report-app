@@ -22,6 +22,7 @@ const useSideStyles = (sentiment: 'positive' | 'negative') => {
 };
 
 const ReportPreview3: React.FC = () => {
+  // --- Data for both sides ---
   const support: ArgumentSideData = {
     title: 'Support Position',
     points: [
@@ -64,12 +65,13 @@ const ReportPreview3: React.FC = () => {
     sentiment: 'negative',
   };
 
-  // Build summary rows for the table
+  // --- Flattened summaryRows for the top grid ---
   const summaryRows = [
-    ...support.stakeholders.map(org => ({ org, pos: 'Support' })),
-    ...oppose.stakeholders.map(org => ({ org, pos: 'Oppose' })),
+    ...support.stakeholders.map((org) => ({ org, pos: 'Support' as const })),
+    ...oppose.stakeholders.map((org) => ({ org, pos: 'Oppose' as const })),
   ];
 
+  // --- Section definitions for the detail grid ---
   const sections = [
     {
       key: 'args',
@@ -96,11 +98,9 @@ const ReportPreview3: React.FC = () => {
       render: (d: ArgumentSideData) => (
         <ul className="space-y-3">
           {d.stakeholders.map((st, i) => (
-            <li key={i} className="text-base flex items-center gap-3">
+            <li key={i} className="flex items-center gap-3 text-base">
               <span
-                className={`w-2 h-2 rounded-full ${useSideStyles(
-                  d.sentiment
-                ).circle}`}
+                className={`w-2 h-2 rounded-full ${useSideStyles(d.sentiment).circle}`}
               />
               {st}
             </li>
@@ -120,49 +120,37 @@ const ReportPreview3: React.FC = () => {
 
   return (
     <div className="report-preview-container">
+      {/* Title */}
       <div className="text-center mb-6">
         <span className="inline-block px-4 py-1.5 text-sm font-medium bg-purple-100 text-purple-800 rounded-full">
           Arguments Analysis
         </span>
       </div>
 
-      {/* ——— New Supporters/Opposers Table ——— */}
-      <div className="overflow-x-auto mb-8">
-        <table className="min-w-full bg-white divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Organization
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Position
-              </th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {summaryRows.map(({ org, pos }, i) => (
-              <tr key={i}>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                  {org}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <span
-                    className={`inline-block px-2 py-1 rounded-full ${
-                      pos === 'Support'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}
-                  >
-                    {pos}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {/* 4-column summary grid */}
+      <div className="grid grid-cols-4 gap-4 mb-8">
+        {summaryRows.map(({ org, pos }, idx) => (
+          <div
+            key={idx}
+            className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded"
+          >
+            <span className="text-sm text-gray-700 truncate">{org}</span>
+            <span
+              className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full ${
+                pos === 'Support'
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-red-100 text-red-800'
+              }`}
+            >
+              {pos}
+            </span>
+          </div>
+        ))}
       </div>
 
+      {/* Detailed 2×4 grid inside the Card */}
       <Card variant="default" className="overflow-hidden">
+        {/* Card header */}
         <div className="p-8 bg-white border-b border-gray-200">
           <h2 className="text-2xl font-bold mb-3">
             AB 1122: Dual Enrollment Programs
@@ -172,9 +160,10 @@ const ReportPreview3: React.FC = () => {
           </p>
         </div>
 
+        {/* 2 columns × 4 rows (header + 3 sections) */}
         <div className="grid grid-cols-2 divide-x divide-gray-200">
-          {/* HEADER ROW */}
-          {[support, oppose].map(side => {
+          {/* Row 1: headers for each side */}
+          {[support, oppose].map((side) => {
             const { bg, text, Icon } = useSideStyles(side.sentiment);
             return (
               <div key={side.sentiment} className={`p-8 ${bg}`}>
@@ -186,9 +175,9 @@ const ReportPreview3: React.FC = () => {
             );
           })}
 
-          {/* DYNAMIC SECTION ROWS */}
-          {sections.map(sec =>
-            [support, oppose].map(side => (
+          {/* Rows 2–4: each section duplicated for support & oppose */}
+          {sections.map((sec) =>
+            [support, oppose].map((side) => (
               <div
                 key={side.sentiment + sec.key}
                 className={`p-8 border-t border-gray-200 pt-6 ${sec.minH}`}
