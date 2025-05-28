@@ -12,9 +12,9 @@ interface ArgumentSideProps {
 
 const ArgumentSide: React.FC<ArgumentSideProps> = ({ title, points, stakeholders, impact, sentiment }) => {
   const isPositive = sentiment === 'positive';
-  const bgColor = isPositive ? 'bg-green-50/80' : 'bg-red-50/80';
+  const bgColor = isPositive ? 'bg-green-50/10' : 'bg-red-50/10';
   const textColor = isPositive ? 'text-green-700' : 'text-red-700';
-  const borderColor = isPositive ? 'border-green-200' : 'border-red-200';
+  const borderColor = 'border-gray-100';
   const Icon = isPositive ? ThumbsUp : ThumbsDown;
 
   return (
@@ -29,7 +29,7 @@ const ArgumentSide: React.FC<ArgumentSideProps> = ({ title, points, stakeholders
         <ul className="space-y-3">
           {points.map((point, index) => (
             <li key={index} className="flex items-start gap-3">
-              <CircleDot className={`w-4 h-4 mt-1 shrink-0 ${isPositive ? 'text-green-600' : 'text-red-600'}`} />
+              <CircleDot className={`w-4 h-4 mt-1 shrink-0 ${isPositive ? 'text-green-600/80' : 'text-red-600/80'}`} />
               <span className="text-base">{point}</span>
             </li>
           ))}
@@ -41,7 +41,7 @@ const ArgumentSide: React.FC<ArgumentSideProps> = ({ title, points, stakeholders
         <ul className="space-y-2">
           {stakeholders.map((stakeholder, index) => (
             <li key={index} className="text-base flex items-center gap-2">
-              <span className={`w-1.5 h-1.5 rounded-full ${isPositive ? 'bg-green-600' : 'bg-red-600'}`} />
+              <span className={`w-1.5 h-1.5 rounded-full ${isPositive ? 'bg-green-600/80' : 'bg-red-600/80'}`} />
               {stakeholder}
             </li>
           ))}
@@ -103,12 +103,12 @@ const ReportPreview3: React.FC = () => {
       </div>
       
       <Card variant="default" className="overflow-hidden">
-        <div className="p-6 bg-white border-b border-gray-200">
+        <div className="p-6 bg-white border-b border-gray-100">
           <h2 className="text-2xl font-bold mb-2">AB 1122: Dual Enrollment Programs</h2>
           <p className="text-gray-600">Analysis of supporting and opposing positions</p>
         </div>
         
-        <div className="flex divide-x divide-gray-200">
+        <div className="flex divide-x divide-gray-100">
           <ArgumentSide {...supportData} />
           <ArgumentSide {...opposeData} />
         </div>
