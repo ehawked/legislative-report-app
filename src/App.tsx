@@ -6,6 +6,7 @@ import Card from './components/Card';
 import FeaturesCarousel from './components/FeaturesCarousel';
 import SampleReportPreview from './components/SampleReportPreview';
 import ReportPreview2 from './components/ReportPreview2';
+import ReportPreview3 from './components/ReportPreview3';
 import './components/ReportPreview.css';
 import { generateReport, downloadPdf, type ReportRequest } from './lib/webhookService';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -80,7 +81,7 @@ function App() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const billRegex = /^(AB|SB|HR)\d+$/i;
+    const billRegex = /^(AB|SB)\d+$/i;
     if (!billRegex.test(billNumber)) {
       setError('Please enter a valid bill number format (e.g., AB 123, SB 456)');
       return;
@@ -258,7 +259,7 @@ function App() {
           </p>
           
           <div className="flex justify-center gap-4 mb-6">
-            {[0, 1].map((idx) => (
+            {[0, 1, 2].map((idx) => (
               <button
                 key={idx}
                 className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
@@ -284,6 +285,12 @@ function App() {
               <div className="flex-[0_0_100%] min-w-0">
                 <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
                   <ReportPreview2 />
+                </div>
+              </div>
+
+              <div className="flex-[0_0_100%] min-w-0">
+                <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
+                  <ReportPreview3 />
                 </div>
               </div>
             </div>
