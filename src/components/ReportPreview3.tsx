@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import { FiThumbsUp, FiThumbsDown } from 'react-icons/fi';
+import { ThumbsUp, ThumbsDown, CircleDot } from 'lucide-react';
 
 interface ArgumentSideProps {
   title: string;
@@ -11,42 +11,46 @@ interface ArgumentSideProps {
 }
 
 const ArgumentSide: React.FC<ArgumentSideProps> = ({ title, points, stakeholders, impact, sentiment }) => {
-  const bgColor = sentiment === 'positive' ? 'bg-emerald-50' : 'bg-rose-50';
-  const textColor = sentiment === 'positive' ? 'text-emerald-700' : 'text-rose-700';
-  const borderColor = sentiment === 'positive' ? 'border-emerald-200' : 'border-rose-200';
-  const icon = sentiment === 'positive' ? <FiThumbsUp className="w-5 h-5" /> : <FiThumbsDown className="w-5 h-5" />;
+  const isPositive = sentiment === 'positive';
+  const bgColor = isPositive ? 'bg-green-50/80' : 'bg-red-50/80';
+  const textColor = isPositive ? 'text-green-700' : 'text-red-700';
+  const borderColor = isPositive ? 'border-green-200' : 'border-red-200';
+  const Icon = isPositive ? ThumbsUp : ThumbsDown;
 
   return (
     <div className={`flex-1 p-6 ${bgColor}`}>
-      <div className={`flex items-center gap-2 mb-4 ${textColor}`}>
-        {icon}
-        <h3 className="text-lg font-semibold">{title}</h3>
+      <div className={`flex items-center gap-2 mb-6 ${textColor}`}>
+        <Icon className="w-5 h-5" strokeWidth={2.5} />
+        <h3 className="text-lg font-bold">{title}</h3>
       </div>
       
-      <div className={`border-t ${borderColor} pt-4 mb-4`}>
-        <h4 className="font-medium mb-2">Key Arguments</h4>
-        <ul className="space-y-2">
+      <div className={`border-t ${borderColor} pt-4 mb-6`}>
+        <h4 className="text-base font-bold mb-3">Key Arguments</h4>
+        <ul className="space-y-3">
           {points.map((point, index) => (
-            <li key={index} className="flex items-start gap-2">
-              <span className={`mt-1.5 w-1.5 h-1.5 rounded-full ${sentiment === 'positive' ? 'bg-emerald-500' : 'bg-rose-500'}`} />
-              <span className="text-sm">{point}</span>
+            <li key={index} className="flex items-start gap-3">
+              <CircleDot className={`w-4 h-4 mt-1 shrink-0 ${isPositive ? 'text-green-600' : 'text-red-600'}`} />
+              <span className="text-base">{point}</span>
             </li>
           ))}
         </ul>
       </div>
       
-      <div className={`border-t ${borderColor} pt-4 mb-4`}>
-        <h4 className="font-medium mb-2">Key Stakeholders</h4>
-        <ul className="space-y-1">
+      <div className={`border-t ${borderColor} pt-4 mb-6`}>
+        <h4 className="text-base font-bold mb-3">Key Stakeholders</h4>
+        <ul className="space-y-2">
           {stakeholders.map((stakeholder, index) => (
-            <li key={index} className="text-sm">{stakeholder}</li>
+            <li key={index} className="text-base flex items-center gap-2">
+              <span className={`w-1.5 h-1.5 rounded-full ${isPositive ? 'bg-green-600' : 'bg-red-600'}`} />
+              {stakeholder}
+            </li>
           ))}
         </ul>
       </div>
       
       <div className={`border-t ${borderColor} pt-4`}>
-        <h4 className="font-medium mb-2">Projected Impact</h4>
-        <p className="text-sm">{impact}</p>
+        <h4 className="text-base font-bold mb-3">Projected Impact</h4>
+        <p className="text-base">{impact}</p>
       </div>
     </div>
   );
@@ -98,7 +102,7 @@ const ReportPreview3: React.FC = () => {
         </span>
       </div>
       
-      <Card variant="default" className="p-0 overflow-hidden">
+      <Card variant="default" className="overflow-hidden">
         <div className="p-6 bg-white border-b border-gray-200">
           <h2 className="text-2xl font-bold mb-2">AB 1122: Dual Enrollment Programs</h2>
           <p className="text-gray-600">Analysis of supporting and opposing positions</p>
