@@ -1,129 +1,204 @@
 import React from 'react';
 import Card from './Card';
+import { Building2, Users, DollarSign, TrendingUp } from 'lucide-react';
 
 const ReportPreview4: React.FC = () => {
+  const stakeholders = [
+    {
+      name: "California Chamber of Commerce",
+      type: "Business",
+      position: "Support",
+      influence: 85,
+      funding: "$2.3M",
+      icon: Building2,
+      color: "green"
+    },
+    {
+      name: "CFT - California Federation of Teachers",
+      type: "Labor Union",
+      position: "Oppose",
+      influence: 78,
+      funding: "$1.8M",
+      icon: Users,
+      color: "red"
+    },
+    {
+      name: "Campaign for College Opportunity",
+      type: "Advocacy",
+      position: "Support",
+      influence: 72,
+      funding: "$950K",
+      icon: TrendingUp,
+      color: "green"
+    },
+    {
+      name: "California State PTA",
+      type: "Parent Organization",
+      position: "Support",
+      influence: 68,
+      funding: "$1.2M",
+      icon: Users,
+      color: "green"
+    },
+    {
+      name: "Rural Counties Association",
+      type: "Government",
+      position: "Neutral",
+      influence: 45,
+      funding: "$650K",
+      icon: Building2,
+      color: "gray"
+    }
+  ];
+
+  const getPositionColor = (position: string) => {
+    switch (position) {
+      case 'Support': return 'text-green-600 bg-green-50';
+      case 'Oppose': return 'text-red-600 bg-red-50';
+      case 'Neutral': return 'text-gray-600 bg-gray-50';
+      default: return 'text-gray-600 bg-gray-50';
+    }
+  };
+
+  const getInfluenceColor = (influence: number) => {
+    if (influence >= 80) return 'bg-red-500';
+    if (influence >= 70) return 'bg-orange-500';
+    if (influence >= 60) return 'bg-yellow-500';
+    return 'bg-gray-400';
+  };
+
   return (
     <div className="report-preview-container px-4">
       <div className="text-center mb-4">
-        <span className="inline-block px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">Impact Score</span>
+        <span className="inline-block px-3 py-1 text-sm font-medium bg-purple-100 text-purple-800 rounded-full">Stakeholder Network & Influence Map</span>
       </div>
 
       <Card variant="default" className="p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center">AB 1122: Dual Enrollment Programs - Impact Assessment</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">AB 1122: Key Stakeholder Analysis</h2>
         
-        {/* Overall Impact Score */}
-        <div className="mb-8 text-center">
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 text-white mb-4">
-            <span className="text-2xl font-bold">8.5</span>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">High Impact Legislation</h3>
-          <p className="text-gray-600">This bill has significant potential to improve educational outcomes statewide</p>
-        </div>
-
-        {/* Impact Categories */}
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          <Card variant="outline" className="p-4">
-            <h4 className="font-semibold text-gray-800 mb-3">Educational Impact</h4>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Student Access</span>
-                <div className="flex items-center space-x-2">
-                  <div className="w-16 bg-gray-200 rounded-full h-2">
-                    <div className="bg-green-500 h-2 rounded-full" style={{ width: '90%' }}></div>
-                  </div>
-                  <span className="text-sm font-medium text-green-600">9.0</span>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">College Readiness</span>
-                <div className="flex items-center space-x-2">
-                  <div className="w-16 bg-gray-200 rounded-full h-2">
-                    <div className="bg-green-500 h-2 rounded-full" style={{ width: '85%' }}></div>
-                  </div>
-                  <span className="text-sm font-medium text-green-600">8.5</span>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Equity Improvement</span>
-                <div className="flex items-center space-x-2">
-                  <div className="w-16 bg-gray-200 rounded-full h-2">
-                    <div className="bg-blue-500 h-2 rounded-full" style={{ width: '80%' }}></div>
-                  </div>
-                  <span className="text-sm font-medium text-blue-600">8.0</span>
-                </div>
-              </div>
+        {/* Network Overview */}
+        <div className="grid md:grid-cols-3 gap-4 mb-8">
+          <Card variant="outline" className="p-4 text-center">
+            <div className="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-2">
+              <TrendingUp size={24} />
             </div>
+            <div className="text-2xl font-bold text-green-600 mb-1">23</div>
+            <div className="text-sm text-gray-600">Supporting Organizations</div>
           </Card>
-
-          <Card variant="outline" className="p-4">
-            <h4 className="font-semibold text-gray-800 mb-3">Implementation Impact</h4>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Fiscal Burden</span>
-                <div className="flex items-center space-x-2">
-                  <div className="w-16 bg-gray-200 rounded-full h-2">
-                    <div className="bg-yellow-500 h-2 rounded-full" style={{ width: '60%' }}></div>
-                  </div>
-                  <span className="text-sm font-medium text-yellow-600">6.0</span>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Administrative Complexity</span>
-                <div className="flex items-center space-x-2">
-                  <div className="w-16 bg-gray-200 rounded-full h-2">
-                    <div className="bg-orange-500 h-2 rounded-full" style={{ width: '70%' }}></div>
-                  </div>
-                  <span className="text-sm font-medium text-orange-600">7.0</span>
-                </div>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600">Timeline Feasibility</span>
-                <div className="flex items-center space-x-2">
-                  <div className="w-16 bg-gray-200 rounded-full h-2">
-                    <div className="bg-green-500 h-2 rounded-full" style={{ width: '75%' }}></div>
-                  </div>
-                  <span className="text-sm font-medium text-green-600">7.5</span>
-                </div>
-              </div>
+          
+          <Card variant="outline" className="p-4 text-center">
+            <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-2">
+              <Users size={24} />
             </div>
+            <div className="text-2xl font-bold text-red-600 mb-1">1</div>
+            <div className="text-sm text-gray-600">Opposing Organizations</div>
+          </Card>
+          
+          <Card variant="outline" className="p-4 text-center">
+            <div className="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center mx-auto mb-2">
+              <DollarSign size={24} />
+            </div>
+            <div className="text-2xl font-bold text-purple-600 mb-1">$8.2M</div>
+            <div className="text-sm text-gray-600">Total Lobbying Power</div>
           </Card>
         </div>
 
-        {/* Key Impact Areas */}
-        <div className="border-t pt-6">
-          <h4 className="font-semibold text-gray-800 mb-4">Projected Outcomes</h4>
-          <div className="grid md:grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-green-50 rounded-lg">
-              <div className="text-2xl font-bold text-green-600 mb-1">35%</div>
-              <div className="text-sm text-gray-600">Increase in dual enrollment participation</div>
-            </div>
-            <div className="text-center p-4 bg-blue-50 rounded-lg">
-              <div className="text-2xl font-bold text-blue-600 mb-1">150K</div>
-              <div className="text-sm text-gray-600">Additional students served annually</div>
-            </div>
-            <div className="text-center p-4 bg-purple-50 rounded-lg">
-              <div className="text-2xl font-bold text-purple-600 mb-1">$2.8M</div>
-              <div className="text-sm text-gray-600">Annual implementation cost</div>
-            </div>
-          </div>
+        {/* Stakeholder List */}
+        <div className="space-y-4">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Key Stakeholders by Influence</h3>
+          
+          {stakeholders.map((stakeholder, index) => {
+            const IconComponent = stakeholder.icon;
+            return (
+              <Card key={index} variant="outline" className="p-4 hover:shadow-md transition-shadow">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4 flex-1">
+                    <div className={`w-10 h-10 rounded-full bg-${stakeholder.color === 'green' ? 'green' : stakeholder.color === 'red' ? 'red' : 'gray'}-100 text-${stakeholder.color === 'green' ? 'green' : stakeholder.color === 'red' ? 'red' : 'gray'}-600 flex items-center justify-center`}>
+                      <IconComponent size={20} />
+                    </div>
+                    
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <h4 className="font-semibold text-gray-800">{stakeholder.name}</h4>
+                        <span className={`px-2 py-1 text-xs rounded-full ${getPositionColor(stakeholder.position)}`}>
+                          {stakeholder.position}
+                        </span>
+                      </div>
+                      
+                      <div className="flex items-center space-x-4 text-sm text-gray-600">
+                        <span>{stakeholder.type}</span>
+                        <span>•</span>
+                        <span>Lobbying: {stakeholder.funding}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-right">
+                    <div className="text-sm text-gray-500 mb-1">Influence Score</div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-20 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className={`h-2 rounded-full ${getInfluenceColor(stakeholder.influence)}`}
+                          style={{ width: `${stakeholder.influence}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-sm font-medium text-gray-700">{stakeholder.influence}</span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            );
+          })}
         </div>
 
-        {/* Risk Assessment */}
-        <div className="mt-6 pt-4 border-t">
-          <h4 className="font-semibold text-gray-800 mb-3">Risk Assessment</h4>
-          <div className="space-y-2">
-            <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
-              <span className="text-sm font-medium text-yellow-800">Faculty Workload Concerns</span>
-              <span className="px-2 py-1 bg-yellow-200 text-yellow-800 text-xs rounded-full">Medium Risk</span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
-              <span className="text-sm font-medium text-green-800">Strong Stakeholder Support</span>
-              <span className="px-2 py-1 bg-green-200 text-green-800 text-xs rounded-full">Low Risk</span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-              <span className="text-sm font-medium text-blue-800">Rural Implementation Challenges</span>
-              <span className="px-2 py-1 bg-blue-200 text-blue-800 text-xs rounded-full">Medium Risk</span>
-            </div>
+        {/* Coalition Analysis */}
+        <div className="mt-8 pt-6 border-t">
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">Coalition Strength Analysis</h3>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card variant="outline" className="p-4">
+              <h4 className="font-semibold text-green-600 mb-3">Pro-Bill Coalition</h4>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span>Combined Influence:</span>
+                  <span className="font-medium">92/100</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Lobbying Resources:</span>
+                  <span className="font-medium">$7.4M</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Geographic Reach:</span>
+                  <span className="font-medium">Statewide</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Key Strength:</span>
+                  <span className="font-medium">Business + Education</span>
+                </div>
+              </div>
+            </Card>
+            
+            <Card variant="outline" className="p-4">
+              <h4 className="font-semibold text-red-600 mb-3">Opposition Coalition</h4>
+              <div className="space-y-2 text-sm">
+                <div className="flex justify-between">
+                  <span>Combined Influence:</span>
+                  <span className="font-medium">78/100</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Lobbying Resources:</span>
+                  <span className="font-medium">$1.8M</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Geographic Reach:</span>
+                  <span className="font-medium">Statewide</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Key Concern:</span>
+                  <span className="font-medium">Faculty Workload</span>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
       </Card>
