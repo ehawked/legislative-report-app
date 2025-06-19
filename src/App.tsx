@@ -7,7 +7,6 @@ import FeaturesCarousel from './components/FeaturesCarousel';
 import SampleReportPreview from './components/SampleReportPreview';
 import ReportPreview2 from './components/ReportPreview2';
 import ReportPreview3 from './components/ReportPreview3';
-import ReportPreview4 from './components/ReportPreview4';
 import './components/ReportPreview.css';
 import { generateReport, downloadPdf, type ReportRequest } from './lib/webhookService';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -260,7 +259,7 @@ function App() {
           </p>
           
           <div className="flex justify-center gap-4 mb-6">
-            {[0, 1, 2, 3].map((idx) => (
+            {[0, 1, 2].map((idx) => (
               <button
                 key={idx}
                 className={`w-3 h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 ${
@@ -292,12 +291,6 @@ function App() {
               <div className="flex-[0_0_100%] min-w-0">
                 <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
                   <ReportPreview3 />
-                </div>
-              </div>
-
-              <div className="flex-[0_0_100%] min-w-0">
-                <div className="scroll-trigger" style={{ transitionDelay: '0.3s' }}>
-                  <ReportPreview4 />
                 </div>
               </div>
             </div>
