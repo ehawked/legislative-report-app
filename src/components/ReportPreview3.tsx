@@ -120,6 +120,11 @@ const ReportPreview3: React.FC = () => {
 
   return (
     <div className="report-preview-container px-4">
+      {/* Added title bubble to match other previews */}
+      <div className="text-center mb-4">
+        <span className="inline-block px-3 py-1 text-sm font-medium bg-orange-100 text-orange-800 rounded-full">Stakeholder Analysis</span>
+      </div>
+      
       {/* ——— Main title, centered ——— */}
       <h1 className="text-3xl font-bold text-center my-8">
         AB 1122: Dual Enrollment Programs
